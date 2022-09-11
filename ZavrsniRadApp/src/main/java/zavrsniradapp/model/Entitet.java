@@ -11,18 +11,23 @@ public class Entitet {
     
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int sifra;
+	private Integer sifra;
 
-    public int getSifra() {
-        return sifra;
-    }
+	public Entitet(Integer sifra) {
+		super();
+		this.sifra = sifra;
+	}
 
-    public void setSifra(int sifra) {
-        this.sifra = sifra;
-    }
-        
-        
-        
-        
-        
+	public Entitet() {
+		super();
+	}
+
+	public Integer getSifra() {
+		return sifra;
+	}
+
+	public void setSifra(Integer sifra) {
+		this.sifra = sifra;
+	}
+
 }

@@ -20,7 +20,7 @@ public class Mobitel extends Entitet {
 
 	public Mobitel(Integer sifra, String naziv, String broj, Date datumZaprimanja, Date pravoNaSlijedeci,
 			String serijskiBroj, Djelatnik djelatnik) {
-		
+		super(sifra);
 		this.naziv = naziv;
 		this.broj = broj;
 		this.datumZaprimanja = datumZaprimanja;

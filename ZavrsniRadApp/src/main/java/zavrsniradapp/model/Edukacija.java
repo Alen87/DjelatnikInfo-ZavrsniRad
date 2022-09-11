@@ -27,7 +27,7 @@ public class Edukacija extends Entitet {
 
 	public Edukacija(Integer sifra, String naziv, Date datum, String voditeljEdukacije, BigDecimal trajanjeEdukacijeMin,
 			List<DjelatnikEdukacija> djelatniciNaEdukacijama) {
-		
+		super(sifra);
 		this.naziv = naziv;
 		this.datum = datum;
 		this.voditeljEdukacije = voditeljEdukacije;

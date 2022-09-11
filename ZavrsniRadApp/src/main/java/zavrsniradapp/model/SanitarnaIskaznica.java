@@ -24,7 +24,7 @@ public class SanitarnaIskaznica extends Entitet {
 
 	public SanitarnaIskaznica(Integer sifra, String brojIskaznice, Date datumObavljenogPregleda, Date vrijediDo,
 			BigDecimal cijenaKn, Djelatnik djelatnik) {
-		
+		super(sifra);
 		this.brojIskaznice = brojIskaznice;
 		this.datumObavljenogPregleda = datumObavljenogPregleda;
 		this.vrijediDo = vrijediDo;
