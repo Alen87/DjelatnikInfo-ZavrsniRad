@@ -18,7 +18,7 @@ public class DjelatnikEdukacija extends Entitet {
     }
 
     public DjelatnikEdukacija(Integer sifra, Djelatnik djelatnik, Edukacija edukacija, BigDecimal ocijena) {
-        super(sifra);
+       
         this.djelatnik = djelatnik;
         this.edukacija = edukacija;
         this.ocijena = ocijena;

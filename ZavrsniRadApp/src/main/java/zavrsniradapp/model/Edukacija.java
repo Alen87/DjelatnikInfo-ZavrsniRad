@@ -19,7 +19,7 @@ public class Edukacija extends Entitet {
         
         
        // @OnetoMany(mappedBy = "grupa")
-	private List<DjelatnikEdukacija> djelatniciNaEdukacijama = new ArrayList();
+	//private List<DjelatnikEdukacija> djelatniciNaEdukacijama = new ArrayList();
 
 	public Edukacija() {
 		super();
@@ -27,12 +27,12 @@ public class Edukacija extends Entitet {
 
 	public Edukacija(Integer sifra, String naziv, Date datum, String voditeljEdukacije, BigDecimal trajanjeEdukacijeMin,
 			List<DjelatnikEdukacija> djelatniciNaEdukacijama) {
-		super(sifra);
+		
 		this.naziv = naziv;
 		this.datum = datum;
 		this.voditeljEdukacije = voditeljEdukacije;
 		this.trajanjeEdukacijeMin = trajanjeEdukacijeMin;
-		this.djelatniciNaEdukacijama = djelatniciNaEdukacijama;
+		//this.djelatniciNaEdukacijama = djelatniciNaEdukacijama;
 	}
 
 	public String getNaziv() {
@@ -67,12 +67,12 @@ public class Edukacija extends Entitet {
 		this.trajanjeEdukacijeMin = trajanjeEdukacijeMin;
 	}
 
-	public List<DjelatnikEdukacija> getDjelatniciNaEdukacijama() {
-		return djelatniciNaEdukacijama;
-	}
+	//public List<DjelatnikEdukacija> getDjelatniciNaEdukacijama() {
+	//	return djelatniciNaEdukacijama;
+	//}
 
-	public void setDjelatniciNaEdukacijama(List<DjelatnikEdukacija> djelatniciNaEdukacijama) {
-		this.djelatniciNaEdukacijama = djelatniciNaEdukacijama;
-	}
+	//public void setDjelatniciNaEdukacijama(List<DjelatnikEdukacija> djelatniciNaEdukacijama) {
+	//	this.djelatniciNaEdukacijama = djelatniciNaEdukacijama;
+	//}
 
 }
