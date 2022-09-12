@@ -4,7 +4,9 @@
  */
 package zavrsniradapp.util;
 
+import com.github.javafaker.Faker;
 import org.hibernate.Session;
+import zavrsniradapp.model.Djelatnik;
 
 /**
  *
@@ -17,7 +19,15 @@ public class PocetniInsert {
         Session s = HibernateUtil.getSession();
         s.beginTransaction();
         
+        Faker f =new Faker();
+        Djelatnik djelatnik;
         
+        for(int i =0;i<10;i++){
+            djelatnik=new Djelatnik();
+            djelatnik.setIme(f.address().firstName());
+            djelatnik.setPrezime(f.address().lastName());
+            s.persist(djelatnik);
+        }
         
         
         
