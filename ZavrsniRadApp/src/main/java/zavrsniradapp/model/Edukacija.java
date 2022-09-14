@@ -18,8 +18,8 @@ public class Edukacija extends Entitet {
 	private BigDecimal trajanjeEdukacijeMin;
         
         
-       // @OnetoMany(mappedBy = "grupa")
-	//private List<DjelatnikEdukacija> djelatniciNaEdukacijama = new ArrayList();
+        @OneToMany(mappedBy = "edukacija")
+        private List<DjelatnikEdukacija> djelatniciNaEdukacijama = new ArrayList();
 
 	public Edukacija() {
 		super();
@@ -67,12 +67,12 @@ public class Edukacija extends Entitet {
 		this.trajanjeEdukacijeMin = trajanjeEdukacijeMin;
 	}
 
-	//public List<DjelatnikEdukacija> getDjelatniciNaEdukacijama() {
-	//	return djelatniciNaEdukacijama;
-	//}
+	public List<DjelatnikEdukacija> getDjelatniciNaEdukacijama() {
+		return djelatniciNaEdukacijama;
+	}
 
-	//public void setDjelatniciNaEdukacijama(List<DjelatnikEdukacija> djelatniciNaEdukacijama) {
-	//	this.djelatniciNaEdukacijama = djelatniciNaEdukacijama;
-	//}
+	public void setDjelatniciNaEdukacijama(List<DjelatnikEdukacija> djelatniciNaEdukacijama) {
+		this.djelatniciNaEdukacijama = djelatniciNaEdukacijama;
+	}
 
 }

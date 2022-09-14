@@ -4,6 +4,7 @@ import jakarta.persistence.Entity;
 import java.util.Date;
 
 
+
 @Entity
 public class Djelatnik extends Entitet {
 	private String ime;
