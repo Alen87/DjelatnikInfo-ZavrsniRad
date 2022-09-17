@@ -5,8 +5,10 @@
 
 package djelatnikinfo;
 
-import djelatnikinfo.util.HibernateUtil;
+
 import djelatnikinfo.util.PocetniInsert;
+
+
 
 /**
  *
@@ -16,8 +18,8 @@ public class Start {
 
     public Start() {
         
-        PocetniInsert.izvedi();
-        
+   new PocetniInsert();
+   
         
     }
     
