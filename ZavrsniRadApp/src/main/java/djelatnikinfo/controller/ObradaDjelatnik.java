@@ -2,21 +2,21 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package zavrsniradapp.controller;
+package djelatnikinfo.controller;
 
 import java.util.List;
-import zavrsniradapp.model.SanitarnaIskaznica;
-import zavrsniradapp.util.AppException;
+import djelatnikinfo.model.Djelatnik;
+import djelatnikinfo.util.AppException;
 
 /**
  *
  * @author Alen
  */
-public class ObradaSanitarnaIskaznica extends Obrada<SanitarnaIskaznica>{
+public class ObradaDjelatnik extends Obrada<Djelatnik> {
 
     @Override
-    public List<SanitarnaIskaznica> read() {
-     return session.createQuery("from SanitarnaIskaznica", SanitarnaIskaznica.class).list();
+    public List<Djelatnik> read() {
+       return session.createQuery("from Djelatnik", Djelatnik.class).list();
     }
 
     @Override
@@ -26,13 +26,12 @@ public class ObradaSanitarnaIskaznica extends Obrada<SanitarnaIskaznica>{
 
     @Override
     protected void kontrolaUpdate() throws AppException {
-       
+        
     }
 
     @Override
     protected void kontrolaDelete() throws AppException {
         
     }
-    
     
 }

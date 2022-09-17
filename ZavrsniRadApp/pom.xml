@@ -9,7 +9,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>18</maven.compiler.source>
         <maven.compiler.target>18</maven.compiler.target>
-        <exec.mainClass>zavrsniradapp.Start</exec.mainClass>
+        <exec.mainClass>djelatnikinfo.Start</exec.mainClass>
     </properties>
     <dependencies>
         
@@ -39,8 +39,11 @@
             <version>1.0.2</version>
         </dependency>
        
+
+
        
        
        
     </dependencies>
- </project>
+    <name>DjelatnikInfo</name>
+</project>

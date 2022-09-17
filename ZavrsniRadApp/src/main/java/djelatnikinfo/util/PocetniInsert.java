@@ -2,11 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package zavrsniradapp.util;
+package djelatnikinfo.util;
 
 import com.github.javafaker.Faker;
 import org.hibernate.Session;
-import zavrsniradapp.model.Djelatnik;
+import djelatnikinfo.model.Djelatnik;
 
 /**
  *

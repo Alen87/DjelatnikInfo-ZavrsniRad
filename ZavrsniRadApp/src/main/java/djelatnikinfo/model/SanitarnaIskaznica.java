@@ -1,4 +1,4 @@
-package zavrsniradapp.model;
+package djelatnikinfo.model;
 
 
 import jakarta.persistence.Entity;

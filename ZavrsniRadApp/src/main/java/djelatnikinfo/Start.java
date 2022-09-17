@@ -3,10 +3,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Project/Maven2/JavaApp/src/main/java/${packagePath}/${mainClassName}.java to edit this template
  */
 
-package zavrsniradapp;
+package djelatnikinfo;
 
-import zavrsniradapp.util.HibernateUtil;
-import zavrsniradapp.util.PocetniInsert;
+import djelatnikinfo.util.HibernateUtil;
+import djelatnikinfo.util.PocetniInsert;
 
 /**
  *

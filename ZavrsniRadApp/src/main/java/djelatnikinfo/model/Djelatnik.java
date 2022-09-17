@@ -1,7 +1,9 @@
-package zavrsniradapp.model;
+package djelatnikinfo.model;
+
 
 import jakarta.persistence.Entity;
 import java.util.Date;
+
 
 
 

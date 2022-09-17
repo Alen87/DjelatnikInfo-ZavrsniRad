@@ -7,7 +7,7 @@
 
         <!-- https://www.tutorialspoint.com/hibernate/hibernate_annotations.htm -->
 
-        <property name="connection.url">jdbc:mariadb://localhost:3306/zavrsniradapp?createDatabaseIfNotExist=true</property>
+        <property name="connection.url">jdbc:mariadb://localhost:3306/djelatnik_info-zavrsni_rad?createDatabaseIfNotExist=true</property>
         <property name="connection.username">root</property>
         <property name="connection.password"></property>
         <property name="connection.driver_class">org.mariadb.jdbc.Driver</property>
@@ -37,12 +37,12 @@
 
 
         <!-- moraju se slijedno navesti klase koje su mapirane -->
-        <mapping class="zavrsniradapp.model.Djelatnik" />
-        <mapping class="zavrsniradapp.model.DjelatnikEdukacija" />
-        <mapping class="zavrsniradapp.model.Edukacija" />
-        <mapping class="zavrsniradapp.model.Entitet" />
-        <mapping class="zavrsniradapp.model.Mobitel" />
-        <mapping class="zavrsniradapp.model.SanitarnaIskaznica" />        
+        <mapping class="djelatnikinfo.model.Djelatnik" />
+        <mapping class="djelatnikinfo.model.DjelatnikEdukacija" />
+        <mapping class="djelatnikinfo.model.Edukacija" />
+        <mapping class="djelatnikinfo.model.Entitet" />
+        <mapping class="djelatnikinfo.model.Mobitel" />
+        <mapping class="djelatnikinfo.model.SanitarnaIskaznica" />        
        
     </session-factory>
 </hibernate-configuration>
