@@ -33,5 +33,10 @@ public class ObradaDjelatnikEdukacija extends Obrada<DjelatnikEdukacija>{
     protected void kontrolaDelete() throws AppException {
        
     }
+
+    @Override
+    protected String getNazivEntiteta() {
+       return "DjelatnikEdukacija";
+    }
     
 }

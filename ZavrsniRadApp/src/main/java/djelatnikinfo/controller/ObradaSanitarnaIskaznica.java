@@ -33,6 +33,11 @@ public class ObradaSanitarnaIskaznica extends Obrada<SanitarnaIskaznica>{
     protected void kontrolaDelete() throws AppException {
         
     }
+
+    @Override
+    protected String getNazivEntiteta() {
+      return "SanitarnaIskaznica";
+    }
     
     
 }

@@ -4,17 +4,18 @@
  */
 package djelatnikinfo.controller;
 
+import djelatnikinfo.model.Entitet;
 import java.util.List;
 import djelatnikinfo.util.HibernateUtil;
 import org.hibernate.Session;
-import org.hibernate.Hibernate;
+
 import djelatnikinfo.util.AppException;
 
 /**
  *
  * @author Alen
  */
-public abstract class Obrada<T> {
+public abstract class Obrada<T extends Entitet> {
 
     protected T entitet;
     protected Session session;
@@ -27,11 +28,16 @@ public abstract class Obrada<T> {
 
     protected abstract void kontrolaDelete() throws AppException;
 
+    protected abstract String getNazivEntiteta();
+
     public Obrada() {
         this.session = HibernateUtil.getSession();
     }
 
     public void create() throws AppException {
+        if (entitet == null) {
+            throw new AppException(getNazivEntiteta() + " nije  konstruiran");
+        }
         kontrolaCreate();
         persist();
     }

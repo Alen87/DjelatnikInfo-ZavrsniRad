@@ -6,6 +6,9 @@
 package djelatnikinfo;
 
 
+import djelatnikinfo.controller.ObradaDjelatnik;
+import djelatnikinfo.model.Djelatnik;
+import djelatnikinfo.util.AppException;
 import djelatnikinfo.util.PocetniInsert;
 
 
@@ -18,7 +21,19 @@ public class Start {
 
     public Start() {
         
-   new PocetniInsert();
+//   new PocetniInsert();
+   ObradaDjelatnik od = new ObradaDjelatnik();
+   Djelatnik d = new Djelatnik();
+   d.setIme("Pero");
+   d.setPrezime("Perić");
+   d.setOib("52696585235");
+   od.setEntitet(d);
+        try {
+            od.create();
+        } catch (AppException ex) {
+            System.out.println(ex.getPoruka());
+        }
+
    
         
     }

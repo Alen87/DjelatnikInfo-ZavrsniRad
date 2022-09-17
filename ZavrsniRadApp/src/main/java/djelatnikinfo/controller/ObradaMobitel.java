@@ -32,5 +32,10 @@ public class ObradaMobitel extends Obrada<Mobitel> {
     @Override
     protected void kontrolaDelete() throws AppException {
     }
+
+    @Override
+    protected String getNazivEntiteta() {
+       return "Mobitel";
+    }
     
 }
