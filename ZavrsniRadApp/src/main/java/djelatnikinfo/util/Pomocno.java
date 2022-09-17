@@ -4,11 +4,16 @@
  */
 package djelatnikinfo.util;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  *
  * @author Alen
  */
 public class Pomocno {
+    
+    public static final String FORMAT_DATUMA = "dd.MM.yyyy";
     
     public static boolean kontrolaOib(String oib){
         
@@ -40,5 +45,17 @@ public class Pomocno {
         kontrolni = kontrolni % 10;
 
         return kontrolni == (chars[10] - asciiDigitsOffset);
+        
+        
+        
     }
+    
+    public static String getPrimjerdatuma(){
+            SimpleDateFormat df = new SimpleDateFormat(FORMAT_DATUMA);
+            return df.format(new Date());
+        }
+        
+    
+    
+    
 }
