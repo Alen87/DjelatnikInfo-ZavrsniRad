@@ -50,7 +50,7 @@ public class Pomocno {
         
     }
     
-    public static String getPrimjerdatuma(){
+    public static String getPrimjerDatuma(){
             SimpleDateFormat df = new SimpleDateFormat(FORMAT_DATUMA);
             return df.format(new Date());
         }

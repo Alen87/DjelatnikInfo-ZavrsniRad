@@ -44,6 +44,7 @@ public class ObradaDjelatnik extends Obrada<Djelatnik> {
 
     private void kontrolaIme() throws AppException {
         kontrolaImeMoraBitiUneseno();
+        kontrolaImeMoraSadrzavatiSamoSlova();
     }
 
     private void kontrolaImeMoraBitiUneseno() throws AppException {
@@ -78,9 +79,15 @@ public class ObradaDjelatnik extends Obrada<Djelatnik> {
 
     private void kontrolaOibMoraBitiUneseno() throws AppException {
         if (entitet.getOib() == null || entitet.getOib().trim().isEmpty()) {
-            throw new AppException("Oib obvezan");
+            throw new AppException("Unos OIB-a obvezan");
         }
 
+    }
+
+    private void kontrolaImeMoraSadrzavatiSamoSlova() throws AppException {
+        if (!entitet.getIme().matches("\\p{L}+")) {
+            throw new AppException("Ime mora sadržavati samo slova!");
+        }
     }
 
 }

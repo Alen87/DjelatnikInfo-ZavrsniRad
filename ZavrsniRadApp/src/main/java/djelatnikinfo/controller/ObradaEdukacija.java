@@ -7,6 +7,7 @@ package djelatnikinfo.controller;
 import java.util.List;
 import djelatnikinfo.model.Edukacija;
 import djelatnikinfo.util.AppException;
+import djelatnikinfo.util.Pomocno;
 
 /**
  *
@@ -21,7 +22,8 @@ public class ObradaEdukacija extends Obrada<Edukacija>{
 
     @Override
     protected void kontrolaCreate() throws AppException {
-       
+       kontrolaNaziv();
+       kontrolaDatum();
     }
 
     @Override
@@ -37,6 +39,27 @@ public class ObradaEdukacija extends Obrada<Edukacija>{
     @Override
     protected String getNazivEntiteta() {
         return "Edukacija";
+    }
+
+    private void kontrolaNaziv()throws AppException {
+        kontrolaNazivMoraBitiUnesen();
+    }
+
+    private void kontrolaNazivMoraBitiUnesen() throws AppException {
+        if(entitet.getNaziv()==null || entitet.getNaziv().trim().isEmpty()){
+            throw new AppException("Naziv  mora biti  unesen");
+        }
+    }
+
+    private void kontrolaDatum()throws AppException {
+        kontrolaDatumObvezno();
+    }
+
+    private void kontrolaDatumObvezno() throws AppException {
+        if(entitet.getDatum() == null){
+            throw new AppException("Datum pocetka obavezno" + Pomocno.getPrimjerDatuma());
+        }
+        
     }
     
 }
