@@ -4,6 +4,8 @@
  */
 package djelatnikinfo.controller;
 
+import djelatnikinfo.model.Djelatnik;
+import djelatnikinfo.model.DjelatnikEdukacija;
 import java.util.List;
 import djelatnikinfo.model.Edukacija;
 import djelatnikinfo.util.AppException;
@@ -34,6 +36,7 @@ public class ObradaEdukacija extends Obrada<Edukacija>{
     @Override
     protected void kontrolaDelete() throws AppException {
         
+        
     }
 
     @Override
@@ -57,7 +60,7 @@ public class ObradaEdukacija extends Obrada<Edukacija>{
 
     private void kontrolaDatumObvezno() throws AppException {
         if(entitet.getDatum() == null){
-            throw new AppException("Datum pocetka obavezno" + Pomocno.getPrimjerDatuma());
+            throw new AppException("Unos datum obavljenog pregleda obvezan , npr ... " + Pomocno.getPrimjerDatuma());
         }
         
     }

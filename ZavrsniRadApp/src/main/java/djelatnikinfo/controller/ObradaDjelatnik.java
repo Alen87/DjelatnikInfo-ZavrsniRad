@@ -56,7 +56,7 @@ public class ObradaDjelatnik extends Obrada<Djelatnik> {
 
     private void kontrolaPrezime() throws AppException {
         kontrolaPrezimeMoraBitiUneseno();
-
+        kontrolaPrezimeMoraSadrzavatiSamoSlova();
     }
 
     private void kontrolaPrezimeMoraBitiUneseno() throws AppException {
@@ -86,7 +86,13 @@ public class ObradaDjelatnik extends Obrada<Djelatnik> {
 
     private void kontrolaImeMoraSadrzavatiSamoSlova() throws AppException {
         if (!entitet.getIme().matches("\\p{L}+")) {
-            throw new AppException("Ime mora sadržavati samo slova!");
+            throw new AppException("Ime mora sadrzavati samo slova!");
+        }
+    }
+
+    private void kontrolaPrezimeMoraSadrzavatiSamoSlova() throws AppException {
+        if (!entitet.getPrezime().matches("\\p{L}+")) {
+            throw new AppException("Prezime mora  sadrzavati samo  slova!");
         }
     }
 

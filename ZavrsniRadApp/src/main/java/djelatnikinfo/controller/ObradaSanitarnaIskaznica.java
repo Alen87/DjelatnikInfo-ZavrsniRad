@@ -58,7 +58,7 @@ public class ObradaSanitarnaIskaznica extends Obrada<SanitarnaIskaznica> {
 
     private void kontrolaDatumObavljenogPregledaObavezno() throws AppException {
         if (entitet.getDatumObavljenogPregleda() == null) {
-            throw new AppException("Datum obavljenog  pregleda obavezno" + Pomocno.getPrimjerDatuma());
+            throw new AppException("Unos datum obavljenog pregleda obvezan , npr ... " + Pomocno.getPrimjerDatuma());
         }
     }
 
@@ -69,7 +69,7 @@ public class ObradaSanitarnaIskaznica extends Obrada<SanitarnaIskaznica> {
 
     private void kontrolaDatumVrijediDoObavezno() throws AppException {
         if(entitet.getVrijediDo() == null ){
-            throw new AppException("Datum vrijedi do obavezno" + Pomocno.getPrimjerDatuma());
+            throw new AppException("Unos datum vrijedi do obvezan , npr ... " + Pomocno.getPrimjerDatuma());
         }
     }
 
