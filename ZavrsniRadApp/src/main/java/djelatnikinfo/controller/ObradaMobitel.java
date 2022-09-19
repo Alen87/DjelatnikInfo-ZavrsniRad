@@ -21,7 +21,7 @@ public class ObradaMobitel extends Obrada<Mobitel> {
 
     @Override
     protected void kontrolaCreate() throws AppException {
-       
+       kontrolaNaziv();
     }
 
     @Override
@@ -36,6 +36,17 @@ public class ObradaMobitel extends Obrada<Mobitel> {
     @Override
     protected String getNazivEntiteta() {
        return "Mobitel";
+    }
+
+    private void kontrolaNaziv()throws AppException {
+        kontrolaNazivObvezno();
+       
+    }
+
+    private void kontrolaNazivObvezno()throws AppException {
+        if(entitet.getNaziv() == null || entitet.getNaziv().trim().isEmpty()){
+            throw new AppException("Naziv mobitela obvezno");
+        }
     }
     
 }

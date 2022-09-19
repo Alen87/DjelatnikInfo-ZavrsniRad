@@ -15,28 +15,36 @@ import djelatnikinfo.util.Pomocno;
  *
  * @author Alen
  */
-public class ObradaEdukacija extends Obrada<Edukacija>{
+public class ObradaEdukacija extends Obrada<Edukacija> {
 
     @Override
     public List<Edukacija> read() {
-        return session.createQuery("from Edukacija",Edukacija.class).list();
+        return session.createQuery("from Edukacija", Edukacija.class).list();
     }
 
     @Override
     protected void kontrolaCreate() throws AppException {
-       kontrolaNaziv();
-       kontrolaDatum();
+        kontrolaNaziv();
+        kontrolaDatum();
     }
 
     @Override
     protected void kontrolaUpdate() throws AppException {
-      
+
     }
 
     @Override
     protected void kontrolaDelete() throws AppException {
-        
-        
+//        if (entitet.getDjelatniciNaEdukacijama() != null || entitet.getDjelatniciNaEdukacijama().size() > 0) {
+//            StringBuilder sb = new StringBuilder();
+//            sb.append("/n");
+//            for (DjelatnikEdukacija de : entitet.getDjelatniciNaEdukacijama()) {
+//                sb.append(de.getDjelatnik() + " " + de.getOcijena());
+//                sb.append("/n");
+//            }
+//            throw new AppException("Ne možete obrisati Edukaciju dok joj pripadaju djelatnici:" + sb.toString());
+//        }
+
     }
 
     @Override
@@ -44,25 +52,25 @@ public class ObradaEdukacija extends Obrada<Edukacija>{
         return "Edukacija";
     }
 
-    private void kontrolaNaziv()throws AppException {
+    private void kontrolaNaziv() throws AppException {
         kontrolaNazivMoraBitiUnesen();
     }
 
     private void kontrolaNazivMoraBitiUnesen() throws AppException {
-        if(entitet.getNaziv()==null || entitet.getNaziv().trim().isEmpty()){
+        if (entitet.getNaziv() == null || entitet.getNaziv().trim().isEmpty()) {
             throw new AppException("Naziv  mora biti  unesen");
         }
     }
 
-    private void kontrolaDatum()throws AppException {
+    private void kontrolaDatum() throws AppException {
         kontrolaDatumObvezno();
     }
 
     private void kontrolaDatumObvezno() throws AppException {
-        if(entitet.getDatum() == null){
+        if (entitet.getDatum() == null) {
             throw new AppException("Unos datum obavljenog pregleda obvezan , npr ... " + Pomocno.getPrimjerDatuma());
         }
-        
+
     }
-    
+
 }
