@@ -14,6 +14,7 @@ import java.util.Date;
 public class Pomocno {
     
     public static final String FORMAT_DATUMA = "dd.MM.yyyy";
+    public static final String NAZIV_APLIKACIJE = "DJELATNIK INFO";
     
     public static boolean kontrolaOib(String oib){
         

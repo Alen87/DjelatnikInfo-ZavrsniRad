@@ -8,9 +8,11 @@ import com.github.javafaker.Faker;
 import djelatnikinfo.model.Djelatnik;
 import djelatnikinfo.model.Edukacija;
 import djelatnikinfo.model.Mobitel;
+import djelatnikinfo.model.Operater;
 import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.Session;
+import org.mindrot.jbcrypt.BCrypt;
 
 /**
  *
@@ -34,6 +36,7 @@ public class PocetniInsert {
         kreirajDjelatnike(10);
         kreirajEdukacije(20);
         kreirajMobitele(15);
+        kreirajOperatera();
         sess.getTransaction().commit();
     }
 
@@ -44,7 +47,7 @@ public class PocetniInsert {
     }
 
     private Djelatnik kreirajDjelatnika() {
-       Djelatnik d = new Djelatnik();
+       Djelatnik d = new Djelatnik() ;
        d.setIme(faker.address().firstName());
        d.setPrezime(faker.address().lastName());
        sess.persist(d);
@@ -75,6 +78,15 @@ public class PocetniInsert {
        m.setNaziv(faker.funnyName().name());
        sess.persist(m);
        return m;
+    }
+
+    private void kreirajOperatera() {
+       Operater o = new Operater();
+       o.setIme("Alen");
+       o.setPrezime("Boric");
+       o.setEmail("boricalen@live.com");
+       o.setLozinka(BCrypt.hashpw("DjelatnikInfo", BCrypt.gensalt()));
+       sess.persist(o);
     }
 
 }

@@ -15,6 +15,7 @@ import djelatnikinfo.model.SanitarnaIskaznica;
 import djelatnikinfo.util.AppException;
 import djelatnikinfo.util.PocetniInsert;
 import djelatnikinfo.util.Pomocno;
+import djelatnikinfo.view.SplashScreen;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.logging.Level;
@@ -27,8 +28,22 @@ import java.util.logging.Logger;
 public class Start {
 
     public Start() {
+        
+        new SplashScreen().setVisible(true);
+        
+        
+        
+        
+        
 
-//   new PocetniInsert();
+    }
+
+    public static void main(String[] args) {
+        new Start();
+    }
+
+    private void testiranje() {
+        //   new PocetniInsert();
         ObradaDjelatnik od = new ObradaDjelatnik();
         Djelatnik d = new Djelatnik();
         d.setIme("Pero");
@@ -85,17 +100,6 @@ public class Start {
         } catch (AppException ex) {
             System.out.println(ex.getPoruka());
         }
-        
-     
-        
-        
-        
-        
-        
 
-    }
-
-    public static void main(String[] args) {
-        new Start();
     }
 }

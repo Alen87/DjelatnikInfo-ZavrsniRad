@@ -37,12 +37,14 @@
 
 
         <!-- moraju se slijedno navesti klase koje su mapirane -->
+        
         <mapping class="djelatnikinfo.model.Djelatnik" />
         <mapping class="djelatnikinfo.model.DjelatnikEdukacija" />
         <mapping class="djelatnikinfo.model.Edukacija" />
         <mapping class="djelatnikinfo.model.Entitet" />
         <mapping class="djelatnikinfo.model.Mobitel" />
-        <mapping class="djelatnikinfo.model.SanitarnaIskaznica" />        
+        <mapping class="djelatnikinfo.model.SanitarnaIskaznica" /> 
+        <mapping class="djelatnikinfo.model.Operater" />         
        
     </session-factory>
 </hibernate-configuration>
