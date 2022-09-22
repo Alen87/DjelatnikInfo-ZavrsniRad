@@ -81,7 +81,7 @@ public class PocetniInsert {
     }
 
     private void kreirajOperatera() {
-       Operater o = new Operater();
+     Operater o = new Operater();
        o.setIme("Alen");
        o.setPrezime("Boric");
        o.setEmail("boricalen@live.com");
