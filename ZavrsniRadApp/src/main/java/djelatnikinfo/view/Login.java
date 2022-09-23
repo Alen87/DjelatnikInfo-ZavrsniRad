@@ -4,7 +4,10 @@
  */
 package djelatnikinfo.view;
 
+import djelatnikinfo.controller.ObradaOperater;
+import djelatnikinfo.model.Operater;
 import djelatnikinfo.util.Pomocno;
+import java.awt.event.KeyEvent;
 
 /**
  *
@@ -20,12 +23,11 @@ public class Login extends javax.swing.JFrame {
         postavke();
     }
 
-    private void postavke(){
+    private void postavke() {
         setTitle(Pomocno.NAZIV_APLIKACIJE + " autorizacija");
+        txtEmail.requestFocus();
     }
-    
-    
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -48,9 +50,26 @@ public class Login extends javax.swing.JFrame {
 
         jLabel1.setText("Email");
 
+        txtEmail.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtEmailKeyPressed(evt);
+            }
+        });
+
         jLabel2.setText("Lozinka");
 
+        txtLozinka.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtLozinkaKeyPressed(evt);
+            }
+        });
+
         btnPrijava.setText("Prijava");
+        btnPrijava.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPrijavaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -100,7 +119,41 @@ public class Login extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-  
+    private void txtEmailKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEmailKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            if (txtEmail.getText().trim().isEmpty()) {
+                return;
+            }
+            if (txtLozinka.getPassword().length == 0) {
+                txtLozinka.requestFocus();
+                return;
+            }
+            autorizacija();
+        }
+    }//GEN-LAST:event_txtEmailKeyPressed
+
+    private void txtLozinkaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtLozinkaKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            if (txtLozinka.getPassword().length == 0) {
+                return;
+            }
+            if (txtEmail.getText().trim().isEmpty()) {
+                txtEmail.requestFocus();
+                return;
+            }
+            autorizacija();
+        }
+    }//GEN-LAST:event_txtLozinkaKeyPressed
+
+    private void btnPrijavaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrijavaActionPerformed
+       autorizacija();
+    }//GEN-LAST:event_btnPrijavaActionPerformed
+
+    private void autorizacija() {
+      ObradaOperater oo = new ObradaOperater();
+      Operater o = oo.autoriziraj(txtEmail.getText(),txtLozinka.getPassword() );
+     
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnPrijava;
