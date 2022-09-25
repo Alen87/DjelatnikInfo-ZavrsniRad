@@ -101,6 +101,11 @@ public  class Djelatnik extends Entitet {
 	public void setZavrsenoZanimanje(String zavrsenoZanimanje) {
 		this.zavrsenoZanimanje = zavrsenoZanimanje;
 	}
+
+    @Override
+    public String toString() {
+        return ime + " " + prezime;
+    }
 	
 	
 	

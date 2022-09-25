@@ -51,6 +51,7 @@ public class Login extends javax.swing.JFrame {
 
         jLabel1.setText("Email");
 
+        txtEmail.setText("boricalen@live.com");
         txtEmail.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtEmailKeyPressed(evt);
