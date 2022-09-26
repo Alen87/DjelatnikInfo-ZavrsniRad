@@ -29,6 +29,15 @@ public class ObradaDjelatnik extends Obrada<Djelatnik> {
 
     @Override
     protected void kontrolaUpdate() throws AppException {
+        if(entitet.getMobiteli()!=null && !entitet.getMobiteli().isEmpty()){
+            throw new AppException("Djelatnik ima mobitel i ne  moze se obrisati dok se  ne  obrisu  mobiteli na ovom djelatniku ");
+        }
+        
+        if(entitet.getSanitarneiskaznice()!= null && !entitet.getSanitarneiskaznice().isEmpty()){
+            throw new AppException("Djelatnik ima  sanitarnu  iskaznicu i ne  mooze se obrisati  dok se ne  obrisu saniitarne iskaznice  na  ovom  djelatniku");
+        }
+        
+        
 
     }
 

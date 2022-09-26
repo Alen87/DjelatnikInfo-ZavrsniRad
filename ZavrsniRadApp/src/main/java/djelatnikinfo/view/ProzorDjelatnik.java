@@ -17,14 +17,14 @@ import javax.swing.JOptionPane;
  *
  * @author Alen
  */
-public class ProzorDjelatnici extends javax.swing.JFrame {
+public class ProzorDjelatnik extends javax.swing.JFrame {
 
     private ObradaDjelatnik obrada;
 
     /**
      * Creates new form ProzorDjelatnici
      */
-    public ProzorDjelatnici() {
+    public ProzorDjelatnik() {
         initComponents();
         obrada = new ObradaDjelatnik();
         postavke();
@@ -33,6 +33,7 @@ public class ProzorDjelatnici extends javax.swing.JFrame {
 
     private void postavke() {
         setTitle(Pomocno.NAZIV_APLIKACIJE + " Djelatnici");
+        btnObrisi.setVisible(false);
     }
 
     private void ucitaj() {
@@ -74,6 +75,8 @@ public class ProzorDjelatnici extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         txtZavrsenoZanimanje = new javax.swing.JTextField();
         btnDodaj = new javax.swing.JButton();
+        btnPromjeni = new javax.swing.JButton();
+        btnObrisi = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -112,6 +115,20 @@ public class ProzorDjelatnici extends javax.swing.JFrame {
             }
         });
 
+        btnPromjeni.setText("Promjeni");
+        btnPromjeni.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPromjeniActionPerformed(evt);
+            }
+        });
+
+        btnObrisi.setText("Obisi");
+        btnObrisi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnObrisiActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -120,9 +137,6 @@ public class ProzorDjelatnici extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(361, 361, 361))
                     .addComponent(txtIme)
                     .addComponent(txtPrezime)
                     .addComponent(txtOib)
@@ -135,6 +149,7 @@ public class ProzorDjelatnici extends javax.swing.JFrame {
                     .addComponent(txtZavrsenoZanimanje)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
                             .addComponent(jLabel2)
                             .addComponent(jLabel3)
                             .addComponent(jLabel4)
@@ -144,8 +159,13 @@ public class ProzorDjelatnici extends javax.swing.JFrame {
                             .addComponent(jLabel8)
                             .addComponent(jLabel9)
                             .addComponent(jLabel10)
-                            .addComponent(btnDodaj))
-                        .addGap(0, 279, Short.MAX_VALUE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnDodaj)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnPromjeni)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnObrisi)))
+                        .addGap(0, 152, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -157,7 +177,10 @@ public class ProzorDjelatnici extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(17, 17, 17)
-                        .addComponent(btnDodaj)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnDodaj)
+                            .addComponent(btnPromjeni)
+                            .addComponent(btnObrisi))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -227,6 +250,40 @@ public class ProzorDjelatnici extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnDodajActionPerformed
 
+    private void btnPromjeniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPromjeniActionPerformed
+
+        if (obrada.getEntitet() == null) {
+            JOptionPane.showMessageDialog(rootPane, "Prvo oodaberitte  stavku za  promjenu");
+            return;
+        }
+
+        popuniModel();
+
+        try {
+            obrada.update();
+        } catch (AppException ex) {
+            JOptionPane.showMessageDialog(rootPane, ex.getPoruka());
+        }
+
+    }//GEN-LAST:event_btnPromjeniActionPerformed
+
+    private void btnObrisiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnObrisiActionPerformed
+        if (obrada.getEntitet() == null) {
+            JOptionPane.showMessageDialog(rootPane, "Prvo  odaberite  stavku");
+            return;
+        }
+
+        try {
+            obrada.delete();
+            ucitaj();
+        } catch (AppException ex) {
+            JOptionPane.showMessageDialog(rootPane, ex.getPoruka());
+
+        }
+
+
+    }//GEN-LAST:event_btnObrisiActionPerformed
+
     private void popuniModel() {
         var s = obrada.getEntitet();
         s.setIme(txtIme.getText());
@@ -254,11 +311,16 @@ public class ProzorDjelatnici extends javax.swing.JFrame {
         txtRadnaOdjecaObuca.setText(s.getRadnaOdjecaObuca());
         txtUgovor.setText(s.getUgovor());
         txtZavrsenoZanimanje.setText(s.getZavrsenoZanimanje());
-
+        
+        btnObrisi.setVisible(s.getMobiteli()==null || s.getMobiteli().isEmpty());
+        btnObrisi.setVisible(s.getSanitarneiskaznice()==null || s.getSanitarneiskaznice().isEmpty());
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDodaj;
+    private javax.swing.JButton btnObrisi;
+    private javax.swing.JButton btnPromjeni;
     private javax.swing.JTextField dtePocetakRada;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;

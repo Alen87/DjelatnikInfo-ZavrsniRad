@@ -118,8 +118,8 @@ public class Izbornik extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        //otvoriti Jframe ProzorDjelatnici
-        new ProzorDjelatnici().setVisible(true);
+        //otvoriti Jframe ProzorDjelatnik
+        new ProzorDjelatnik().setVisible(true);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
    
