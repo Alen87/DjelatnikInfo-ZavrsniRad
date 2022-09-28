@@ -4,6 +4,7 @@
  */
 package djelatnikinfo.view;
 
+import djelatnikinfo.controller.ObradaOperater;
 import djelatnikinfo.util.HibernateUtil;
 import djelatnikinfo.util.PocetniInsert;
 import javax.swing.JOptionPane;
@@ -36,7 +37,10 @@ public class SplashScreen extends javax.swing.JFrame {
         public void run() {
             Session s = HibernateUtil.getSession();
             if (!s.getMetamodel().getEntities().isEmpty()) {
-               // new PocetniInsert();
+                ObradaOperater op = new ObradaOperater();
+                if (op.read().size() == 0) {
+                    new PocetniInsert();
+                }
                 new Login().setVisible(true);
                 dispose();
             } else {

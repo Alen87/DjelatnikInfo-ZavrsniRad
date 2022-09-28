@@ -20,6 +20,7 @@ import javax.swing.JOptionPane;
 public class ProzorDjelatnik extends javax.swing.JFrame {
 
     private ObradaDjelatnik obrada;
+    private int selectedIndex;
 
     /**
      * Creates new form ProzorDjelatnici
@@ -27,6 +28,7 @@ public class ProzorDjelatnik extends javax.swing.JFrame {
     public ProzorDjelatnik() {
         initComponents();
         obrada = new ObradaDjelatnik();
+        selectedIndex = 0;
         postavke();
         ucitaj();
     }
@@ -40,6 +42,10 @@ public class ProzorDjelatnik extends javax.swing.JFrame {
         DefaultListModel<Djelatnik> m = new DefaultListModel<>();
         m.addAll(obrada.read());
         lstEntiteti.setModel(m);
+
+        if (lstEntiteti.getModel().getSize() > 0) {
+            lstEntiteti.setSelectedIndex(selectedIndex);
+        }
 
     }
 
@@ -242,6 +248,7 @@ public class ProzorDjelatnik extends javax.swing.JFrame {
         popuniModel();
         try {
             obrada.create();
+            selectedIndex = lstEntiteti.getModel().getSize();
             ucitaj();
         } catch (AppException ex) {
             JOptionPane.showMessageDialog(rootPane, ex.getPoruka());
@@ -253,7 +260,7 @@ public class ProzorDjelatnik extends javax.swing.JFrame {
     private void btnPromjeniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPromjeniActionPerformed
 
         if (obrada.getEntitet() == null) {
-            JOptionPane.showMessageDialog(rootPane, "Prvo oodaberitte  stavku za  promjenu");
+            JOptionPane.showMessageDialog(rootPane, "Prvo odaberite  stavku za  promjenu");
             return;
         }
 
@@ -261,6 +268,7 @@ public class ProzorDjelatnik extends javax.swing.JFrame {
 
         try {
             obrada.update();
+            selectedIndex = lstEntiteti.getSelectedIndex();
         } catch (AppException ex) {
             JOptionPane.showMessageDialog(rootPane, ex.getPoruka());
         }
@@ -275,6 +283,10 @@ public class ProzorDjelatnik extends javax.swing.JFrame {
 
         try {
             obrada.delete();
+            selectedIndex = lstEntiteti.getSelectedIndex() - 1;
+            if(selectedIndex <0){
+                selectedIndex=0;
+            }
             ucitaj();
         } catch (AppException ex) {
             JOptionPane.showMessageDialog(rootPane, ex.getPoruka());
@@ -311,10 +323,10 @@ public class ProzorDjelatnik extends javax.swing.JFrame {
         txtRadnaOdjecaObuca.setText(s.getRadnaOdjecaObuca());
         txtUgovor.setText(s.getUgovor());
         txtZavrsenoZanimanje.setText(s.getZavrsenoZanimanje());
-        
-        btnObrisi.setVisible(s.getMobiteli()==null || s.getMobiteli().isEmpty());
-        btnObrisi.setVisible(s.getSanitarneiskaznice()==null || s.getSanitarneiskaznice().isEmpty());
-        
+
+        btnObrisi.setVisible(s.getMobiteli() == null || s.getMobiteli().isEmpty());
+        btnObrisi.setVisible(s.getSanitarneiskaznice() == null || s.getSanitarneiskaznice().isEmpty());
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
