@@ -351,18 +351,22 @@ public class ProzorDjelatnik extends javax.swing.JFrame {
         txtKontakt.setText(s.getKontakt());
         txtEmail.setText(s.getEmail());
 
-        Date input = s.getPocetakRada();
-        LocalDate date = input.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-        prPocetakRada.setDate(date);
+        //Date input = s.getPocetakRada();
+       // LocalDate date = input.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        //prPocetakRada.setDate(date);
+        
+        prPocetakRada.setDate ( s.getPocetakRada().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());                    
+        
+        
 
         txtLoyalityKartica.setText(s.getLoyalityKartica());
         txtRadnaOdjecaObuca.setText(s.getRadnaOdjecaObuca());
         txtUgovor.setText(s.getUgovor());
         txtZavrsenoZanimanje.setText(s.getZavrsenoZanimanje());
 
-        btnObrisi.setVisible(s.getMobiteli() == null || s.getMobiteli().isEmpty());
-        btnObrisi.setVisible(s.getSanitarneiskaznice() == null || s.getSanitarneiskaznice().isEmpty());
-
+       // btnObrisi.setVisible(s.getMobiteli() == null || s.getMobiteli().isEmpty());
+       // btnObrisi.setVisible(s.getSanitarneiskaznice() == null || s.getSanitarneiskaznice().isEmpty());
+        btnObrisi.setVisible((s.getMobiteli() == null || s.getMobiteli().isEmpty()) && (s.getSanitarneiskaznice() == null || s.getSanitarneiskaznice().isEmpty()));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
