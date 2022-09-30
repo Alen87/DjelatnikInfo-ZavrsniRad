@@ -50,6 +50,7 @@ public class PocetniInsert {
        Djelatnik d = new Djelatnik() ;
        d.setIme(faker.address().firstName());
        d.setPrezime(faker.address().lastName());
+     
        sess.persist(d);
        return d;
     }

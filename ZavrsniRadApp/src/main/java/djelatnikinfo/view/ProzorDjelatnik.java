@@ -4,10 +4,15 @@
  */
 package djelatnikinfo.view;
 
+import com.github.lgooddatepicker.components.DatePickerSettings;
 import djelatnikinfo.controller.ObradaDjelatnik;
 import djelatnikinfo.model.Djelatnik;
 import djelatnikinfo.util.AppException;
 import djelatnikinfo.util.Pomocno;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
@@ -36,6 +41,17 @@ public class ProzorDjelatnik extends javax.swing.JFrame {
     private void postavke() {
         setTitle(Pomocno.NAZIV_APLIKACIJE + " Djelatnici");
         btnObrisi.setVisible(false);
+        prilagodiDatePicker();
+
+    }
+
+    private void prilagodiDatePicker() {
+        DatePickerSettings dps = new DatePickerSettings(new Locale("hr", "HR"));
+        dps.setFormatForDatesCommonEra(Pomocno.FORMAT_DATUMA);
+        dps.setTranslationClear("Ocisti");
+        dps.setTranslationToday("Danas");
+        prPocetakRada.setSettings(dps);
+
     }
 
     private void ucitaj() {
@@ -71,7 +87,6 @@ public class ProzorDjelatnik extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         txtEmail = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        dtePocetakRada = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         txtLoyalityKartica = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
@@ -83,6 +98,8 @@ public class ProzorDjelatnik extends javax.swing.JFrame {
         btnDodaj = new javax.swing.JButton();
         btnPromjeni = new javax.swing.JButton();
         btnObrisi = new javax.swing.JButton();
+        txtDovuciOib = new javax.swing.JButton();
+        prPocetakRada = new com.github.lgooddatepicker.components.DatePicker();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -135,6 +152,13 @@ public class ProzorDjelatnik extends javax.swing.JFrame {
             }
         });
 
+        txtDovuciOib.setText("Dovuci Oib");
+        txtDovuciOib.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtDovuciOibActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -145,10 +169,8 @@ public class ProzorDjelatnik extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtIme)
                     .addComponent(txtPrezime)
-                    .addComponent(txtOib)
                     .addComponent(txtKontakt)
                     .addComponent(txtEmail)
-                    .addComponent(dtePocetakRada)
                     .addComponent(txtLoyalityKartica)
                     .addComponent(txtRadnaOdjecaObuca)
                     .addComponent(txtUgovor)
@@ -170,8 +192,13 @@ public class ProzorDjelatnik extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(btnPromjeni)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnObrisi)))
-                        .addGap(0, 152, Short.MAX_VALUE)))
+                                .addComponent(btnObrisi))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(txtOib, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(56, 56, 56)
+                                .addComponent(txtDovuciOib))
+                            .addComponent(prPocetakRada, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 83, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -198,7 +225,9 @@ public class ProzorDjelatnik extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtOib, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtOib, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtDovuciOib))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -210,8 +239,8 @@ public class ProzorDjelatnik extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(dtePocetakRada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addComponent(prPocetakRada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(19, 19, 19)
                         .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtLoyalityKartica, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -284,8 +313,8 @@ public class ProzorDjelatnik extends javax.swing.JFrame {
         try {
             obrada.delete();
             selectedIndex = lstEntiteti.getSelectedIndex() - 1;
-            if(selectedIndex <0){
-                selectedIndex=0;
+            if (selectedIndex < 0) {
+                selectedIndex = 0;
             }
             ucitaj();
         } catch (AppException ex) {
@@ -296,6 +325,10 @@ public class ProzorDjelatnik extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnObrisiActionPerformed
 
+    private void txtDovuciOibActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDovuciOibActionPerformed
+        txtOib.setText(Pomocno.dovuciOib());
+    }//GEN-LAST:event_txtDovuciOibActionPerformed
+
     private void popuniModel() {
         var s = obrada.getEntitet();
         s.setIme(txtIme.getText());
@@ -303,7 +336,6 @@ public class ProzorDjelatnik extends javax.swing.JFrame {
         s.setOib(txtOib.getText());
         s.setKontakt(txtKontakt.getText());
         s.setEmail(txtEmail.getText());
-        // postavi Datum
         s.setLoyalityKartica(txtLoyalityKartica.getText());
         s.setRadnaOdjecaObuca(txtRadnaOdjecaObuca.getText());
         s.setUgovor(txtUgovor.getText());
@@ -318,7 +350,11 @@ public class ProzorDjelatnik extends javax.swing.JFrame {
         txtOib.setText(s.getOib());
         txtKontakt.setText(s.getKontakt());
         txtEmail.setText(s.getEmail());
-        //Unijeti  datum
+
+        Date input = s.getPocetakRada();
+        LocalDate date = input.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        prPocetakRada.setDate(date);
+
         txtLoyalityKartica.setText(s.getLoyalityKartica());
         txtRadnaOdjecaObuca.setText(s.getRadnaOdjecaObuca());
         txtUgovor.setText(s.getUgovor());
@@ -333,7 +369,6 @@ public class ProzorDjelatnik extends javax.swing.JFrame {
     private javax.swing.JButton btnDodaj;
     private javax.swing.JButton btnObrisi;
     private javax.swing.JButton btnPromjeni;
-    private javax.swing.JTextField dtePocetakRada;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
@@ -346,6 +381,8 @@ public class ProzorDjelatnik extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JList<Djelatnik> lstEntiteti;
+    private com.github.lgooddatepicker.components.DatePicker prPocetakRada;
+    private javax.swing.JButton txtDovuciOib;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtIme;
     private javax.swing.JTextField txtKontakt;
