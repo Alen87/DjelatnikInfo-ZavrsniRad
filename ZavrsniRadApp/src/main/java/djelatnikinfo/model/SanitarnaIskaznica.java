@@ -74,4 +74,13 @@ public class SanitarnaIskaznica extends Entitet {
 		this.djelatnik = djelatnik;
 	}
 
+    @Override
+    public String toString() {
+        return this.brojIskaznice;
+    }
+        
+        
+        
+        
+
 }

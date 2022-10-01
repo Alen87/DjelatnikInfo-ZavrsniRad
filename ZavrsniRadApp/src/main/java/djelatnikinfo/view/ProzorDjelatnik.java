@@ -55,10 +55,10 @@ public class ProzorDjelatnik extends javax.swing.JFrame {
     }
 
     private void ucitaj() {
-        DefaultListModel<Djelatnik> m = new DefaultListModel<>();
-        m.addAll(obrada.read());
-        lstEntiteti.setModel(m);
-
+       // DefaultListModel<Djelatnik> m = new DefaultListModel<>();
+       //  m.addAll(obrada.read());
+       //  lstEntiteti.setModel(m);
+        lstEntiteti.setModel(new DjelatnikListModel<>(obrada.read())); 
         if (lstEntiteti.getModel().getSize() > 0) {
             lstEntiteti.setSelectedIndex(selectedIndex);
         }
