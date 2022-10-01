@@ -11,6 +11,7 @@ import djelatnikinfo.model.Edukacija;
 import djelatnikinfo.model.Mobitel;
 import djelatnikinfo.model.Operater;
 import djelatnikinfo.model.SanitarnaIskaznica;
+import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -42,9 +43,9 @@ public class PocetniInsert {
         faker = new Faker();
         sess.beginTransaction();
         kreirajDjelatnike();
-        kreirajEdukacije(1);
+        kreirajEdukacije();
         kreirajMobitele(1);
-        kreirajSanitarneIskaznice(1);
+        kreirajSanitarneIskaznice();
         kreirajOperatera();
         sess.getTransaction().commit();
     }
@@ -126,9 +127,9 @@ public class PocetniInsert {
         sess.persist(c);
         return c;
     }
-    
-    private Djelatnik kreirajPetogDjelatnika(){
-         Djelatnik e = new Djelatnik();
+
+    private Djelatnik kreirajPetogDjelatnika() {
+        Djelatnik e = new Djelatnik();
         e.setIme("Dino");
         e.setPrezime("Pavić");
         e.setOib("21007996506");
@@ -142,30 +143,29 @@ public class PocetniInsert {
 
         sess.persist(e);
         return e;
-        
-        
-    }
-    
-    
 
-    private void kreirajEdukacije(int broj) {
-        for (int i = 0; i < broj; i++) {
-            edukacije.add(kreirajEdukaciju());
-        }
     }
 
-    private Edukacija kreirajEdukaciju() {
-        Edukacija e = new Edukacija();
-        e.setNaziv(faker.book().title());
-        sess.persist(e);
-        return e;
+    private void kreirajEdukacije() {
+        edukacije.add(kreirajPrvuEdukaciju());
+
+    }
+
+    private Edukacija kreirajPrvuEdukaciju() {
+        Edukacija a = new Edukacija();
+        a.setNaziv("Sigurnost hrane");
+        // datum
+        a.setVoditeljEdukacije("Igor Đuza");
+        a.setTrajanjeEdukacijeMin(BigDecimal.valueOf(38.00));
+        sess.persist(a);
+        return a;
 
     }
 
     private void kreirajMobitele(int broj) {
-        for (int i = 0; i < broj; i++) {
+        
             mobiteli.add(kreirajMobitel());
-        }
+        
     }
 
     private Mobitel kreirajMobitel() {
@@ -184,17 +184,64 @@ public class PocetniInsert {
         sess.persist(o);
     }
 
-    private void kreirajSanitarneIskaznice(int broj) {
-        for (int i = 0; i < broj; i++) {
-            sanitarneIskaznice.add(kreirajSanitarnuIskaznicu());
-        }
+    private void kreirajSanitarneIskaznice() {
+        sanitarneIskaznice.add(kreirajPrvuSanitarnuIskaznicu(djelatnici));
+        sanitarneIskaznice.add(kreirajDruguSanitarnuIskaznicu(djelatnici));
+        sanitarneIskaznice.add(kreirajTrecuSanitarnuIskaznicu());
+        sanitarneIskaznice.add(kreirajCetvrtuSanitarnuIskaznicu());
+        sanitarneIskaznice.add(kreirajPetuSanitarnuIskaznicu());
     }
 
-    private SanitarnaIskaznica kreirajSanitarnuIskaznicu() {
-        SanitarnaIskaznica si = new SanitarnaIskaznica();
-        si.setBrojIskaznice(faker.number().digit());
-        sess.persist(si);
-        return si;
+    private SanitarnaIskaznica kreirajPrvuSanitarnuIskaznicu(List<Djelatnik>djelatnici) {
+        SanitarnaIskaznica a = new SanitarnaIskaznica();
+        a.setBrojIskaznice("6574");
+        //a.setDatumObavljenogPregleda();
+        //a.setVrijediDo();
+        a.setCijenaKn(BigDecimal.valueOf(200.00));
+        a.setDjelatnik(djelatnici.get(2));
+        sess.persist(a);
+        return a;
+    }
+
+    private SanitarnaIskaznica kreirajDruguSanitarnuIskaznicu(List<Djelatnik>djelatnici) {
+        SanitarnaIskaznica b = new SanitarnaIskaznica();
+        b.setBrojIskaznice("7563");
+        //b.setDatumObavljenogPregleda();
+        //b.setVrijediDo();
+        b.setCijenaKn(BigDecimal.valueOf(200.00));
+        b.setDjelatnik(djelatnici.get(4));
+        sess.persist(b);
+        return b;
+    }
+
+    private SanitarnaIskaznica kreirajTrecuSanitarnuIskaznicu() {
+        SanitarnaIskaznica c = new SanitarnaIskaznica();
+        c.setBrojIskaznice("2365");
+        //c.setDatumObavljenogPregleda();
+        //c.setVrijediDo();
+        c.setCijenaKn(BigDecimal.valueOf(200.00));
+        sess.persist(c);
+        return c;
+    }
+
+    private SanitarnaIskaznica kreirajCetvrtuSanitarnuIskaznicu() {
+        SanitarnaIskaznica d = new SanitarnaIskaznica();
+        d.setBrojIskaznice("8965");
+        //d.setDatumObavljenogPregleda();
+        //d.setVrijediDo();
+        d.setCijenaKn(BigDecimal.valueOf(200.00));
+        sess.persist(d);
+        return d;
+    }
+
+    private SanitarnaIskaznica kreirajPetuSanitarnuIskaznicu() {
+        SanitarnaIskaznica e = new SanitarnaIskaznica();
+        e.setBrojIskaznice("8453");
+        //e.setDatumObavljenogPregleda();
+        //e.setVrijediDo();
+        e.setCijenaKn(BigDecimal.valueOf(200.00));
+        sess.persist(e);
+        return e;
     }
 
 }

@@ -291,6 +291,8 @@ public class ProzorSanitarnaIskaznica extends javax.swing.JFrame {
         } catch (Exception e) {
             s.setCijenaKn(BigDecimal.ZERO);
         }
+         
+        
     }
 
     private void popuniView() {

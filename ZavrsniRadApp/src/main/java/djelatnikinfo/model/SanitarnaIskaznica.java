@@ -76,7 +76,7 @@ public class SanitarnaIskaznica extends Entitet {
 
     @Override
     public String toString() {
-        return this.brojIskaznice;
+        return this.brojIskaznice ;
     }
         
         
