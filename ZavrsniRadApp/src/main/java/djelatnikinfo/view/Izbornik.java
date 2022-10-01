@@ -113,7 +113,7 @@ public class Izbornik extends javax.swing.JFrame {
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
        JOptionPane.showMessageDialog(rootPane,
-              Pomocno.NAZIV_APLIKACIJE + "\nAutor: Alen Boric",
+              Pomocno.NAZIV_APLIKACIJE + "\nAutor: Alen Borić",
               "O aplikaciji" ,
              JOptionPane.OK_OPTION);
     }//GEN-LAST:event_jMenuItem1ActionPerformed

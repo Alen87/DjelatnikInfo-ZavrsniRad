@@ -11,6 +11,7 @@ import djelatnikinfo.util.AppException;
 import djelatnikinfo.util.Pomocno;
 import java.time.LocalDate;
 import java.time.ZoneId;
+
 import java.util.Date;
 import java.util.Locale;
 import java.util.logging.Level;
@@ -322,7 +323,6 @@ public class ProzorDjelatnik extends javax.swing.JFrame {
 
         }
 
-
     }//GEN-LAST:event_btnObrisiActionPerformed
 
     private void txtDovuciOibActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDovuciOibActionPerformed
@@ -336,6 +336,7 @@ public class ProzorDjelatnik extends javax.swing.JFrame {
         s.setOib(txtOib.getText());
         s.setKontakt(txtKontakt.getText());
         s.setEmail(txtEmail.getText());
+        // ubaciti datum
         s.setLoyalityKartica(txtLoyalityKartica.getText());
         s.setRadnaOdjecaObuca(txtRadnaOdjecaObuca.getText());
         s.setUgovor(txtUgovor.getText());
@@ -355,7 +356,7 @@ public class ProzorDjelatnik extends javax.swing.JFrame {
        // LocalDate date = input.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
         //prPocetakRada.setDate(date);
         
-        prPocetakRada.setDate ( s.getPocetakRada().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());                    
+       // prPocetakRada.setDate ( s.getPocetakRada().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());                    
         
         
 
