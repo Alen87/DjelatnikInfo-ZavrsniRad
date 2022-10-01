@@ -328,7 +328,7 @@ public class ProzorDjelatnik extends javax.swing.JFrame {
     private void txtDovuciOibActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDovuciOibActionPerformed
         txtOib.setText(Pomocno.dovuciOib());
     }//GEN-LAST:event_txtDovuciOibActionPerformed
-
+  
     private void popuniModel() {
         var s = obrada.getEntitet();
         s.setIme(txtIme.getText());

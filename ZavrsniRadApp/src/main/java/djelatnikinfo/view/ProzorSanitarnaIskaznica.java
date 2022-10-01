@@ -10,6 +10,7 @@ import djelatnikinfo.controller.ObradaSanitarnaIskaznica;
 import djelatnikinfo.model.Djelatnik;
 import djelatnikinfo.model.SanitarnaIskaznica;
 import djelatnikinfo.util.Pomocno;
+import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.time.ZoneId;
@@ -32,8 +33,8 @@ public class ProzorSanitarnaIskaznica extends javax.swing.JFrame {
     public ProzorSanitarnaIskaznica() {
         initComponents();
         obrada = new ObradaSanitarnaIskaznica();
-        DecimalFormatSymbols dfs = new DecimalFormatSymbols (new Locale("hr","HR"));
-        nf = new DecimalFormat("###,##0.00",dfs);
+        DecimalFormatSymbols dfs = new DecimalFormatSymbols(new Locale("hr", "HR"));
+        nf = new DecimalFormat("###,##0.00", dfs);
         selectedIndex = 0;
         postavke();
         ucitaj();
@@ -47,6 +48,12 @@ public class ProzorSanitarnaIskaznica extends javax.swing.JFrame {
     }
 
     private void prilagodiDatePicker() {
+        prilagodiDatePickerDatumObavljenogPregleda();
+        prilagodiDatePickerVrijediDo();
+
+    }
+
+    private void prilagodiDatePickerDatumObavljenogPregleda() {
         DatePickerSettings dps = new DatePickerSettings(new Locale("hr", "HR"));
         dps.setFormatForDatesCommonEra(Pomocno.FORMAT_DATUMA);
         dps.setTranslationClear("Ocisti");
@@ -54,11 +61,23 @@ public class ProzorSanitarnaIskaznica extends javax.swing.JFrame {
         dpDatumObavljenogPregleda.setSettings(dps);
 
     }
-     private void ucitajDjelatnike() {
+
+    private void prilagodiDatePickerVrijediDo() {
+
+        DatePickerSettings dp = new DatePickerSettings(new Locale("hr", "HR"));
+        dp.setFormatForDatesCommonEra(Pomocno.FORMAT_DATUMA);
+        dp.setTranslationClear("Ocisti");
+        dp.setTranslationToday("Danas");
+        dpVrijediDo.setSettings(dp);
+
+    }
+
+    private void ucitajDjelatnike() {
         DefaultComboBoxModel<Djelatnik> m = new DefaultComboBoxModel<>();
         m.addAll(new ObradaDjelatnik().read());
         cmbDjelatnici.setModel(m);
     }
+
     private void ucitaj() {
 
         lstEntiteti.setModel(new DjelatnikListModel<>(obrada.read()));
@@ -130,7 +149,7 @@ public class ProzorSanitarnaIskaznica extends javax.swing.JFrame {
                     .addComponent(jLabel4)
                     .addComponent(txtCijena, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cmbDjelatnici, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 67, Short.MAX_VALUE))
+                .addGap(0, 203, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -172,17 +191,25 @@ public class ProzorSanitarnaIskaznica extends javax.swing.JFrame {
         obrada.setEntitet(lstEntiteti.getSelectedValue());
         popuniView();
     }//GEN-LAST:event_lstEntitetiValueChanged
+    private void popuniModel() {
+        var s = obrada.getEntitet();
+        s.setBrojIskaznice(txtBrojIskaznice.getText());
+      try {
+            s.setCijenaKn(new BigDecimal(nf.parse(txtCijena.getText()).toString()));
+        } catch (Exception e) {
+            s.setCijenaKn(BigDecimal.ZERO);
+        }
+    }
 
     private void popuniView() {
         var s = obrada.getEntitet();
         txtBrojIskaznice.setText(s.getBrojIskaznice());
         dpDatumObavljenogPregleda.setDate(s.getDatumObavljenogPregleda().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
         dpVrijediDo.setDate(s.getVrijediDo().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
-        txtCijena.setText(nf.format(s.getCijenaKn()));
+       // txtCijena.setText(nf.format(s.getCijenaKn()));
+  
         cmbDjelatnici.setSelectedItem(s.getDjelatnik());
-        
-        
-        
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
