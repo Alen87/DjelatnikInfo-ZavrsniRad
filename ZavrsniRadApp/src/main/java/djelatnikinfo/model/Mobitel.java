@@ -77,4 +77,14 @@ public class Mobitel extends Entitet {
 		this.djelatnik = djelatnik;
 	}
 
+    @Override
+    public String toString() {
+        return this.naziv;
+    }
+        
+        
+        
+        
+        
+
 }
