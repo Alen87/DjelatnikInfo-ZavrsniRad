@@ -52,10 +52,10 @@ public class ProzorDjelatnik extends javax.swing.JFrame {
     }
 
     private void ucitaj() {
-       // DefaultListModel<Djelatnik> m = new DefaultListModel<>();
-       //  m.addAll(obrada.read());
-       //  lstEntiteti.setModel(m);
-        lstEntiteti.setModel(new DjelatnikListModel<>(obrada.read())); 
+        // DefaultListModel<Djelatnik> m = new DefaultListModel<>();
+        //  m.addAll(obrada.read());
+        //  lstEntiteti.setModel(m);
+        lstEntiteti.setModel(new DjelatnikListModel<>(obrada.read()));
         if (lstEntiteti.getModel().getSize() > 0) {
             lstEntiteti.setSelectedIndex(selectedIndex);
         }
@@ -324,7 +324,7 @@ public class ProzorDjelatnik extends javax.swing.JFrame {
     private void txtDovuciOibActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDovuciOibActionPerformed
         txtOib.setText(Pomocno.dovuciOib());
     }//GEN-LAST:event_txtDovuciOibActionPerformed
-  
+
     private void popuniModel() {
         var s = obrada.getEntitet();
         s.setIme(txtIme.getText());
@@ -347,22 +347,23 @@ public class ProzorDjelatnik extends javax.swing.JFrame {
         txtOib.setText(s.getOib());
         txtKontakt.setText(s.getKontakt());
         txtEmail.setText(s.getEmail());
-             // Datum u  LocalDate
+        // Datum u  LocalDate
         //Date input = s.getPocetakRada();
-       // LocalDate date = input.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        // LocalDate date = input.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
         //prPocetakRada.setDate(date);
-        
-       // prPocetakRada.setDate ( s.getPocetakRada().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());                    
-        
-        
 
+        try {
+            prPocetakRada.setDate(s.getPocetakRada().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+        } catch (Exception e) {
+            prPocetakRada.setDate(null);
+        }
         txtLoyalityKartica.setText(s.getLoyalityKartica());
         txtRadnaOdjecaObuca.setText(s.getRadnaOdjecaObuca());
         txtUgovor.setText(s.getUgovor());
         txtZavrsenoZanimanje.setText(s.getZavrsenoZanimanje());
 
-       // btnObrisi.setVisible(s.getMobiteli() == null || s.getMobiteli().isEmpty());
-       // btnObrisi.setVisible(s.getSanitarneiskaznice() == null || s.getSanitarneiskaznice().isEmpty());
+        // btnObrisi.setVisible(s.getMobiteli() == null || s.getMobiteli().isEmpty());
+        // btnObrisi.setVisible(s.getSanitarneiskaznice() == null || s.getSanitarneiskaznice().isEmpty());
         btnObrisi.setVisible((s.getMobiteli() == null || s.getMobiteli().isEmpty()) && (s.getSanitarneiskaznice() == null || s.getSanitarneiskaznice().isEmpty()));
     }
 

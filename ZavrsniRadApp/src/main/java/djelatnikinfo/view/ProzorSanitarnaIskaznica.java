@@ -14,6 +14,7 @@ import djelatnikinfo.util.Pomocno;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
+import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Locale;
 import javax.swing.DefaultComboBoxModel;
@@ -297,8 +298,19 @@ public class ProzorSanitarnaIskaznica extends javax.swing.JFrame {
     private void popuniView() {
         var s = obrada.getEntitet();
         txtBrojIskaznice.setText(s.getBrojIskaznice());
-       // dpDatumObavljenogPregleda.setDate(s.getDatumObavljenogPregleda().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
-        //dpVrijediDo.setDate(s.getVrijediDo().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+        try {
+            dpDatumObavljenogPregleda.setDate(s.getDatumObavljenogPregleda().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+        } catch (Exception e) {
+            dpDatumObavljenogPregleda.setDate(null);
+        }
+        try {
+             dpVrijediDo.setDate(s.getVrijediDo().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+        } catch (Exception e) {
+            dpVrijediDo.setDate(null);
+        }
+        
+        
+        
         
         try {
            txtCijena.setText(nf.format(s.getCijenaKn())); 

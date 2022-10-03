@@ -87,7 +87,7 @@ public class Izbornik extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setText("Pomoc");
+        jMenu2.setText("Pomoć");
 
         jMenuItem1.setText("O aplikaciji");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
