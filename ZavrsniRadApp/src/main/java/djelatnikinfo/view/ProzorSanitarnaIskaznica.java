@@ -4,6 +4,7 @@
  */
 package djelatnikinfo.view;
 
+import com.github.lgooddatepicker.components.DatePicker;
 import com.github.lgooddatepicker.components.DatePickerSettings;
 import djelatnikinfo.controller.ObradaDjelatnik;
 import djelatnikinfo.controller.ObradaSanitarnaIskaznica;
@@ -16,6 +17,7 @@ import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.Date;
 import java.util.Locale;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
@@ -246,7 +248,7 @@ public class ProzorSanitarnaIskaznica extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDodajActionPerformed
 
     private void btnPromjeniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPromjeniActionPerformed
-         if (obrada.getEntitet() == null) {
+        if (obrada.getEntitet() == null) {
             JOptionPane.showMessageDialog(rootPane, "Prvo odaberite  stavku za  promjenu");
             return;
         }
@@ -283,45 +285,36 @@ public class ProzorSanitarnaIskaznica extends javax.swing.JFrame {
     private void popuniModel() {
         var s = obrada.getEntitet();
         s.setBrojIskaznice(txtBrojIskaznice.getText());
-        
+
         // datum obavljenog  pregleda  
         // vrijedi do
-         try {
+        try {
             s.setCijenaKn(new BigDecimal(nf.parse(txtCijena.getText()).toString()));
         } catch (Exception e) {
             s.setCijenaKn(BigDecimal.ZERO);
         }
-         
+
         // djelatnici 
     }
 
     private void popuniView() {
         var s = obrada.getEntitet();
         txtBrojIskaznice.setText(s.getBrojIskaznice());
-        try {
-            dpDatumObavljenogPregleda.setDate(s.getDatumObavljenogPregleda().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
-        } catch (Exception e) {
-            dpDatumObavljenogPregleda.setDate(null);
-        }
-        try {
-             dpVrijediDo.setDate(s.getVrijediDo().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
-        } catch (Exception e) {
-            dpVrijediDo.setDate(null);
-        }
-        
-        
-        
-        
-        try {
-           txtCijena.setText(nf.format(s.getCijenaKn())); 
-        } catch (Exception e) {
-           
-        }
-        
-  
-        cmbDjelatnici.setSelectedItem(s.getDjelatnik());
+         Pomocno.postaviDatum(dpDatumObavljenogPregleda, s.getDatumObavljenogPregleda());
+         Pomocno.postaviDatum(dpVrijediDo, s.getVrijediDo());
 
+        try {
+            txtCijena.setText(nf.format(s.getCijenaKn()));
+        } catch (Exception e) {
+
+        }
+
+        cmbDjelatnici.setSelectedItem(s.getDjelatnik());
+       
     }
+
+   
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDodaj;

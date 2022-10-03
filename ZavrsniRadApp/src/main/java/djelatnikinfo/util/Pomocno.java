@@ -4,12 +4,14 @@
  */
 package djelatnikinfo.util;
 
+import com.github.lgooddatepicker.components.DatePicker;
 import com.github.lgooddatepicker.components.DatePickerSettings;
 import djelatnikinfo.model.Operater;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.text.SimpleDateFormat;
+import java.time.ZoneId;
 import java.util.Date;
 import java.util.Locale;
 
@@ -94,7 +96,14 @@ public class Pomocno {
         return "";
     }
     
-    
+     public static void postaviDatum(DatePicker dp, Date datum) {
+        try {
+            dp.setDate(datum.toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+        } catch (Exception e) {
+            dp.setDate(null);
+        }
+
+    }
     
         
     } 
