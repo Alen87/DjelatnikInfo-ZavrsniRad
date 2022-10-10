@@ -4,9 +4,12 @@
  */
 package djelatnikinfo.view;
 
+import com.github.lgooddatepicker.components.DatePickerSettings;
 import djelatnikinfo.controller.ObradaEdukacija;
 import djelatnikinfo.model.Edukacija;
 import djelatnikinfo.util.Pomocno;
+import java.text.DecimalFormat;
+import java.util.Locale;
 import javax.swing.DefaultListModel;
 
 /**
@@ -17,6 +20,7 @@ public class ProzorEdukacija extends javax.swing.JFrame {
     
     private ObradaEdukacija obrada;
     private int selectedIndex = 0;
+    private DecimalFormat nf;
     /**
      * Creates new form ProzorEdukacija
      */
@@ -32,7 +36,7 @@ public class ProzorEdukacija extends javax.swing.JFrame {
     private void postavke(){
         
         setTitle(Pomocno.NAZIV_APLIKACIJE + " " + " Edukacije");
-        
+        prilagodiDatePicker();
         
     }
     
@@ -46,6 +50,14 @@ public class ProzorEdukacija extends javax.swing.JFrame {
                 
     }
     
+    
+    private void prilagodiDatePicker() {
+        DatePickerSettings dps = new DatePickerSettings(new Locale("hr", "HR"));
+        dps.setFormatForDatesCommonEra(Pomocno.FORMAT_DATUMA);
+        dps.setTranslationClear("Ocisti");
+        dps.setTranslationToday("Danas");
+        dpDatum.setSettings(dps);
+    }
     
     
     
@@ -115,9 +127,9 @@ public class ProzorEdukacija extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtNaziv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel2)
+                .addGap(12, 12, 12)
                 .addComponent(dpDatum, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel3)
@@ -144,9 +156,16 @@ public class ProzorEdukacija extends javax.swing.JFrame {
     }//GEN-LAST:event_lstEntitetiValueChanged
 
    private void popuniView(){
-       var e = obrada.getEntitet();
-     
-       
+       var d = obrada.getEntitet();
+       txtNaziv.setText(d.getNaziv());
+       Pomocno.postaviDatum(dpDatum, d.getDatum());
+       txtVoditeljEdukacije.setText(d.getVoditeljEdukacije());
+        try {
+            txtTrajanjeEdukacije.setText(nf.format(d.getTrajanjeEdukacijeMin()));
+        } catch (Exception e) {
+
+        }
+              
        
        
        
@@ -164,4 +183,6 @@ public class ProzorEdukacija extends javax.swing.JFrame {
     private javax.swing.JTextField txtTrajanjeEdukacije;
     private javax.swing.JTextField txtVoditeljEdukacije;
     // End of variables declaration//GEN-END:variables
+
+    
 }
