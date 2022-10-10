@@ -264,7 +264,7 @@ public class ProzorMobitel extends javax.swing.JFrame {
 
     private void btnObrisiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnObrisiActionPerformed
        if (obrada.getEntitet() == null) {
-            JOptionPane.showMessageDialog(rootPane, "Prvo  odaberite  stavku za brisanje");
+            JOptionPane.showMessageDialog(rootPane, "Prvo odaberite stavku za brisanje");
             return;
         }
 

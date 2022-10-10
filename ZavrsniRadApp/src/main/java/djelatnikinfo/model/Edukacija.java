@@ -75,4 +75,13 @@ public class Edukacija extends Entitet {
 		this.djelatniciNaEdukacijama = djelatniciNaEdukacijama;
 	}
 
+    @Override
+    public String toString() {
+        return naziv;
+    }
+        
+        
+        
+        
+
 }
