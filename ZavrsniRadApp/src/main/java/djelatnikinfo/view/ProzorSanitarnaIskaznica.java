@@ -258,6 +258,8 @@ public class ProzorSanitarnaIskaznica extends javax.swing.JFrame {
         try {
             obrada.update();
             selectedIndex = lstEntiteti.getSelectedIndex();
+            ucitaj();
+            
         } catch (AppException ex) {
             JOptionPane.showMessageDialog(rootPane, ex.getPoruka());
         }
@@ -285,16 +287,29 @@ public class ProzorSanitarnaIskaznica extends javax.swing.JFrame {
     private void popuniModel() {
         var s = obrada.getEntitet();
         s.setBrojIskaznice(txtBrojIskaznice.getText());
-
-        // datum obavljenog  pregleda  
-        // vrijedi do
+        s.setDatumObavljenogPregleda(dpDatumObavljenogPregleda.getDate() != null
+                ? Date.from(dpDatumObavljenogPregleda.getDate()
+                        .atStartOfDay()
+                        .atZone(ZoneId.systemDefault())
+                        .toInstant()
+                ) : null
+        );
+        
+        s.setVrijediDo(dpVrijediDo.getDate() != null ?
+                Date.from(dpVrijediDo.getDate()
+                          .atStartOfDay()
+                          .atZone(ZoneId.systemDefault())
+                          .toInstant() ): null );
+        
+        
+        
         try {
             s.setCijenaKn(new BigDecimal(nf.parse(txtCijena.getText()).toString()));
         } catch (Exception e) {
             s.setCijenaKn(BigDecimal.ZERO);
         }
 
-        // djelatnici 
+        s.setDjelatnik((Djelatnik) cmbDjelatnici.getSelectedItem());
     }
 
     private void popuniView() {

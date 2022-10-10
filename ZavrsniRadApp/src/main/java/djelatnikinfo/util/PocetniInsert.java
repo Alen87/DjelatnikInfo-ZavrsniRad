@@ -15,6 +15,7 @@ import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -44,7 +45,7 @@ public class PocetniInsert {
         sess.beginTransaction();
         kreirajDjelatnike();
         kreirajEdukacije();
-        kreirajMobitele(1);
+        kreirajMobitele();
         kreirajSanitarneIskaznice();
         kreirajOperatera();
         sess.getTransaction().commit();
@@ -162,18 +163,53 @@ public class PocetniInsert {
 
     }
 
-    private void kreirajMobitele(int broj) {
+    private void kreirajMobitele() {
         
-            mobiteli.add(kreirajMobitel());
+            mobiteli.add(kreirajPrviMobitel(djelatnici));
+            mobiteli.add(kreirajDrugiMobitel(djelatnici));
+            mobiteli.add(kreirajTreciMobitel(djelatnici));
         
     }
 
-    private Mobitel kreirajMobitel() {
+    private Mobitel kreirajPrviMobitel(List<Djelatnik>djelatnici) {
         Mobitel m = new Mobitel();
-        m.setNaziv(faker.funnyName().name());
+        m.setNaziv("SAMSUNG Galaxy A52S 5G White");
+        m.setBroj("091/267 5332");
+        m.setDatumZaprimanja(new Date());
+        m.setPravoNaSlijedeci(new Date());
+        m.setSerijskiBroj("B19V3CELCO2011Y");
+        m.setDjelatnik(djelatnici.get(1));
         sess.persist(m);
         return m;
     }
+    
+    private Mobitel kreirajDrugiMobitel(List<Djelatnik>djelatnici) {
+        Mobitel m = new Mobitel();
+        m.setNaziv("HUAWEI Nova Y90 Black");
+        m.setBroj("091/267 5331");
+        m.setDatumZaprimanja(new Date());
+        m.setPravoNaSlijedeci(new Date());
+        m.setSerijskiBroj("B23V4CELCO8311Y");
+        m.setDjelatnik(djelatnici.get(0));
+        sess.persist(m);
+        return m;
+    }
+    
+    private Mobitel kreirajTreciMobitel(List<Djelatnik>djelatnici) {
+        Mobitel m = new Mobitel();
+        m.setNaziv("SAMSUNG Galaxy A13 White");
+        m.setBroj("091/267 5330");
+        m.setDatumZaprimanja(new Date());
+        m.setPravoNaSlijedeci(new Date());
+        m.setSerijskiBroj("B23V4CELCO7856Y");
+        m.setDjelatnik(djelatnici.get(4));
+        sess.persist(m);
+        return m;
+    }
+    
+    
+    
+    
 
     private void kreirajOperatera() {
         Operater o = new Operater();
@@ -187,16 +223,16 @@ public class PocetniInsert {
     private void kreirajSanitarneIskaznice() {
         sanitarneIskaznice.add(kreirajPrvuSanitarnuIskaznicu(djelatnici));
         sanitarneIskaznice.add(kreirajDruguSanitarnuIskaznicu(djelatnici));
-        sanitarneIskaznice.add(kreirajTrecuSanitarnuIskaznicu());
-        sanitarneIskaznice.add(kreirajCetvrtuSanitarnuIskaznicu());
-        sanitarneIskaznice.add(kreirajPetuSanitarnuIskaznicu());
+        sanitarneIskaznice.add(kreirajTrecuSanitarnuIskaznicu(djelatnici));
+        sanitarneIskaznice.add(kreirajCetvrtuSanitarnuIskaznicu(djelatnici));
+        sanitarneIskaznice.add(kreirajPetuSanitarnuIskaznicu(djelatnici));
     }
 
     private SanitarnaIskaznica kreirajPrvuSanitarnuIskaznicu(List<Djelatnik>djelatnici) {
         SanitarnaIskaznica a = new SanitarnaIskaznica();
         a.setBrojIskaznice("6574");
-        //a.setDatumObavljenogPregleda();
-        //a.setVrijediDo();
+        a.setDatumObavljenogPregleda(new Date());
+        a.setVrijediDo(new Date());
         a.setCijenaKn(BigDecimal.valueOf(200.00));
         a.setDjelatnik(djelatnici.get(2));
         sess.persist(a);
@@ -206,40 +242,43 @@ public class PocetniInsert {
     private SanitarnaIskaznica kreirajDruguSanitarnuIskaznicu(List<Djelatnik>djelatnici) {
         SanitarnaIskaznica b = new SanitarnaIskaznica();
         b.setBrojIskaznice("7563");
-        //b.setDatumObavljenogPregleda();
-        //b.setVrijediDo();
+        b.setDatumObavljenogPregleda(new Date());
+        b.setVrijediDo(new Date());
         b.setCijenaKn(BigDecimal.valueOf(200.00));
         b.setDjelatnik(djelatnici.get(4));
         sess.persist(b);
         return b;
     }
 
-    private SanitarnaIskaznica kreirajTrecuSanitarnuIskaznicu() {
+    private SanitarnaIskaznica kreirajTrecuSanitarnuIskaznicu( List<Djelatnik>djelatnici ) {
         SanitarnaIskaznica c = new SanitarnaIskaznica();
         c.setBrojIskaznice("2365");
-        //c.setDatumObavljenogPregleda();
-        //c.setVrijediDo();
+        c.setDatumObavljenogPregleda(new Date());
+        c.setVrijediDo(new Date());
         c.setCijenaKn(BigDecimal.valueOf(200.00));
+        c.setDjelatnik(djelatnici.get(0));
         sess.persist(c);
         return c;
     }
 
-    private SanitarnaIskaznica kreirajCetvrtuSanitarnuIskaznicu() {
+    private SanitarnaIskaznica kreirajCetvrtuSanitarnuIskaznicu(List<Djelatnik>djelatnici) {
         SanitarnaIskaznica d = new SanitarnaIskaznica();
         d.setBrojIskaznice("8965");
-        //d.setDatumObavljenogPregleda();
-        //d.setVrijediDo();
+        d.setDatumObavljenogPregleda(new Date());
+        d.setVrijediDo(new Date());
         d.setCijenaKn(BigDecimal.valueOf(200.00));
+        d.setDjelatnik(djelatnici.get(1));
         sess.persist(d);
         return d;
     }
 
-    private SanitarnaIskaznica kreirajPetuSanitarnuIskaznicu() {
+    private SanitarnaIskaznica kreirajPetuSanitarnuIskaznicu(List<Djelatnik>djelatnici) {
         SanitarnaIskaznica e = new SanitarnaIskaznica();
         e.setBrojIskaznice("8453");
-        //e.setDatumObavljenogPregleda();
-        //e.setVrijediDo();
+        e.setDatumObavljenogPregleda(new Date());
+        e.setVrijediDo(new Date());
         e.setCijenaKn(BigDecimal.valueOf(200.00));
+        e.setDjelatnik(djelatnici.get(3));
         sess.persist(e);
         return e;
     }
