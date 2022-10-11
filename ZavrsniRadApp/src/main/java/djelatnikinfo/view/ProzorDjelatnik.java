@@ -356,8 +356,8 @@ public class ProzorDjelatnik extends javax.swing.JFrame {
         txtEmail.setText(s.getEmail());
         // Datum u  LocalDate
         //Date input = s.getPocetakRada();
-        // LocalDate date = input.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-        //prPocetakRada.setDate(date);
+        //LocalDate date = input.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        //dpPocetakRada.setDate(date);
         Pomocno.postaviDatum(dpPocetakRada, s.getPocetakRada());
         txtLoyalityKartica.setText(s.getLoyalityKartica());
         txtRadnaOdjecaObuca.setText(s.getRadnaOdjecaObuca());

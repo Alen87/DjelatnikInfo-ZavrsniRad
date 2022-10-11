@@ -66,7 +66,7 @@ public class PocetniInsert {
         d.setOib("28247397961");
         d.setKontakt("091/3423456");
         d.setEmail("danko.stefancic@gmail.com");
-        // datum
+        d.setPocetakRada(new Date());
         d.setLoyalityKartica("5647893054728");
         d.setRadnaOdjecaObuca("hlače 2kom 52,majica 3kom L,papuče 42");
         d.setUgovor("Neodređeno");
@@ -84,7 +84,7 @@ public class PocetniInsert {
         a.setOib("33313572379");
         a.setKontakt("091/2233456");
         a.setEmail("josip.nad@gmail.com");
-        //a.setPocetakRada();
+        a.setPocetakRada(new Date());
         a.setLoyalityKartica("8455674893485");
         a.setRadnaOdjecaObuca("hlače 2kom 52,majica 3kom M,papuče 41");
         a.setUgovor("Neodređeno");
@@ -102,7 +102,7 @@ public class PocetniInsert {
         b.setOib("75894763546");
         b.setKontakt("098/2233456");
         b.setEmail("matej.cindric@gmail.com");
-        //a.setPocetakRada();
+        b.setPocetakRada(new Date());
         b.setLoyalityKartica("48933506200");
         b.setRadnaOdjecaObuca("hlače 2kom 46,majica 3kom M,papuče 43");
         b.setUgovor("Neodređeno");
@@ -119,7 +119,7 @@ public class PocetniInsert {
         c.setOib("46738926735");
         c.setKontakt("091/4353456");
         c.setEmail("stjepan.biljus@live.com");
-        //a.setPocetakRada();
+        c.setPocetakRada(new Date());
         c.setLoyalityKartica("47835674856");
         c.setRadnaOdjecaObuca("hlače 2kom 46,majica 3kom L,papuče 44");
         c.setUgovor("Neodređeno");
@@ -136,7 +136,7 @@ public class PocetniInsert {
         e.setOib("21007996506");
         e.setKontakt("091/7689456");
         e.setEmail("dino.pavic@gmail.com");
-        //a.setPocetakRada();
+        e.setPocetakRada(new Date());
         e.setLoyalityKartica("76895048905");
         e.setRadnaOdjecaObuca("Zimsko odjelo br.56,čizme br.44,majica kratki rukav XL");
         e.setUgovor("Na određeno do 15.12.2022");
@@ -155,7 +155,7 @@ public class PocetniInsert {
     private Edukacija kreirajPrvuEdukaciju() {
         Edukacija a = new Edukacija();
         a.setNaziv("Sigurnost hrane");
-        // datum
+        a.setDatum(new Date());
         a.setVoditeljEdukacije("Igor Đuza");
         a.setTrajanjeEdukacijeMin(Integer.valueOf(38));
         sess.persist(a);
