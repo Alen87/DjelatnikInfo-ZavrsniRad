@@ -7,6 +7,7 @@ package djelatnikinfo.util;
 import com.github.javafaker.Faker;
 import djelatnikinfo.controller.ObradaDjelatnik;
 import djelatnikinfo.model.Djelatnik;
+import djelatnikinfo.model.DjelatnikEdukacija;
 import djelatnikinfo.model.Edukacija;
 import djelatnikinfo.model.Mobitel;
 import djelatnikinfo.model.Operater;
@@ -148,19 +149,32 @@ public class PocetniInsert {
     }
 
     private void kreirajEdukacije() {
-        edukacije.add(kreirajPrvuEdukaciju());
+        edukacije.add(kreirajPrvuEdukaciju(djelatnici));
 
     }
 
-    private Edukacija kreirajPrvuEdukaciju() {
+    private Edukacija kreirajPrvuEdukaciju(List<Djelatnik>djelatnici) {
         Edukacija a = new Edukacija();
         a.setNaziv("Sigurnost hrane");
         a.setDatum(new Date());
         a.setVoditeljEdukacije("Igor Đuza");
         a.setTrajanjeEdukacijeMin(Integer.valueOf(38));
+       
         sess.persist(a);
-        return a;
-
+        
+       DjelatnikEdukacija de = new DjelatnikEdukacija();
+       de.setEdukacija(a);
+       for(int i=0;i<djelatnici.size();i++){
+       de.setDjelatnik(djelatnici.get(0));
+       de.setDjelatnik(djelatnici.get(1));
+       de.setDjelatnik(djelatnici.get(3));
+       sess.persist(de);
+       }
+       
+       a.getDjelatniciNaEdukacijama().add(de);
+    
+       sess.persist(a);
+       return a;
     }
 
     private void kreirajMobitele() {

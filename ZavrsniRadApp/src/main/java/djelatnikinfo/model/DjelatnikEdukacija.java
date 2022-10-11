@@ -48,4 +48,13 @@ public class DjelatnikEdukacija extends Entitet {
         this.ocijena = ocijena;
     }
 
+    @Override
+    public String toString() {
+        return djelatnik.getIme() + " " + djelatnik.getPrezime();
+
+    }
+    
+    
+    
+
 }
