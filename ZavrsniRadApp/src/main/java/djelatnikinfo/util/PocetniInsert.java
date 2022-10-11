@@ -157,7 +157,7 @@ public class PocetniInsert {
         a.setNaziv("Sigurnost hrane");
         // datum
         a.setVoditeljEdukacije("Igor Đuza");
-        a.setTrajanjeEdukacijeMin(BigDecimal.valueOf(38.00));
+        a.setTrajanjeEdukacijeMin(Integer.valueOf(38));
         sess.persist(a);
         return a;
 

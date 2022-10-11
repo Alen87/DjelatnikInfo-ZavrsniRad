@@ -47,7 +47,7 @@ public class ProzorDjelatnik extends javax.swing.JFrame {
         dps.setFormatForDatesCommonEra(Pomocno.FORMAT_DATUMA);
         dps.setTranslationClear("Ocisti");
         dps.setTranslationToday("Danas");
-        prPocetakRada.setSettings(dps);
+        dpPocetakRada.setSettings(dps);
 
     }
 
@@ -96,7 +96,7 @@ public class ProzorDjelatnik extends javax.swing.JFrame {
         btnPromjeni = new javax.swing.JButton();
         btnObrisi = new javax.swing.JButton();
         txtDovuciOib = new javax.swing.JButton();
-        prPocetakRada = new com.github.lgooddatepicker.components.DatePicker();
+        dpPocetakRada = new com.github.lgooddatepicker.components.DatePicker();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -188,7 +188,7 @@ public class ProzorDjelatnik extends javax.swing.JFrame {
                                 .addComponent(txtOib, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(56, 56, 56)
                                 .addComponent(txtDovuciOib))
-                            .addComponent(prPocetakRada, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(dpPocetakRada, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 169, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -231,7 +231,7 @@ public class ProzorDjelatnik extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(prPocetakRada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(dpPocetakRada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(19, 19, 19)
                         .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -295,6 +295,7 @@ public class ProzorDjelatnik extends javax.swing.JFrame {
         try {
             obrada.update();
             selectedIndex = lstEntiteti.getSelectedIndex();
+            ucitaj();
         } catch (AppException ex) {
             JOptionPane.showMessageDialog(rootPane, ex.getPoruka());
         }
@@ -332,7 +333,13 @@ public class ProzorDjelatnik extends javax.swing.JFrame {
         s.setOib(txtOib.getText());
         s.setKontakt(txtKontakt.getText());
         s.setEmail(txtEmail.getText());
-        // ubaciti datum
+        s.setPocetakRada(dpPocetakRada.getDate() != null
+                ? Date.from(dpPocetakRada.getDate()
+                        .atStartOfDay()
+                        .atZone(ZoneId.systemDefault())
+                        .toInstant()
+                ) : null
+        );
         s.setLoyalityKartica(txtLoyalityKartica.getText());
         s.setRadnaOdjecaObuca(txtRadnaOdjecaObuca.getText());
         s.setUgovor(txtUgovor.getText());
@@ -351,14 +358,14 @@ public class ProzorDjelatnik extends javax.swing.JFrame {
         //Date input = s.getPocetakRada();
         // LocalDate date = input.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
         //prPocetakRada.setDate(date);
-        Pomocno.postaviDatum(prPocetakRada, s.getPocetakRada());
+        Pomocno.postaviDatum(dpPocetakRada, s.getPocetakRada());
         txtLoyalityKartica.setText(s.getLoyalityKartica());
         txtRadnaOdjecaObuca.setText(s.getRadnaOdjecaObuca());
         txtUgovor.setText(s.getUgovor());
         txtZavrsenoZanimanje.setText(s.getZavrsenoZanimanje());
 
-        // btnObrisi.setVisible(s.getMobiteli() == null || s.getMobiteli().isEmpty());
-        // btnObrisi.setVisible(s.getSanitarneiskaznice() == null || s.getSanitarneiskaznice().isEmpty());
+        btnObrisi.setVisible(s.getMobiteli() == null || s.getMobiteli().isEmpty());
+        btnObrisi.setVisible(s.getSanitarneiskaznice() == null || s.getSanitarneiskaznice().isEmpty());
         btnObrisi.setVisible((s.getMobiteli() == null || s.getMobiteli().isEmpty()) && (s.getSanitarneiskaznice() == null || s.getSanitarneiskaznice().isEmpty()));
     }
 
@@ -366,6 +373,7 @@ public class ProzorDjelatnik extends javax.swing.JFrame {
     private javax.swing.JButton btnDodaj;
     private javax.swing.JButton btnObrisi;
     private javax.swing.JButton btnPromjeni;
+    private com.github.lgooddatepicker.components.DatePicker dpPocetakRada;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
@@ -378,7 +386,6 @@ public class ProzorDjelatnik extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JList<Djelatnik> lstEntiteti;
-    private com.github.lgooddatepicker.components.DatePicker prPocetakRada;
     private javax.swing.JButton txtDovuciOib;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtIme;

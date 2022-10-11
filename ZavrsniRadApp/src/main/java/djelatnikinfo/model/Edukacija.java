@@ -15,7 +15,7 @@ public class Edukacija extends Entitet {
 	private String naziv;
 	private Date datum;
 	private String voditeljEdukacije;
-	private BigDecimal trajanjeEdukacijeMin;
+	private Integer trajanjeEdukacijeMin;
         
         
         @OneToMany(mappedBy = "edukacija")
@@ -25,7 +25,7 @@ public class Edukacija extends Entitet {
 		super();
 	}
 
-	public Edukacija(Integer sifra, String naziv, Date datum, String voditeljEdukacije, BigDecimal trajanjeEdukacijeMin,
+	public Edukacija(Integer sifra, String naziv, Date datum, String voditeljEdukacije, Integer trajanjeEdukacijeMin,
 			List<DjelatnikEdukacija> djelatniciNaEdukacijama) {
 		super(sifra);
 		this.naziv = naziv;
@@ -59,11 +59,11 @@ public class Edukacija extends Entitet {
 		this.voditeljEdukacije = voditeljEdukacije;
 	}
 
-	public BigDecimal getTrajanjeEdukacijeMin() {
+	public Integer getTrajanjeEdukacijeMin() {
 		return trajanjeEdukacijeMin;
 	}
 
-	public void setTrajanjeEdukacijeMin(BigDecimal trajanjeEdukacijeMin) {
+	public void setTrajanjeEdukacijeMin(Integer trajanjeEdukacijeMin) {
 		this.trajanjeEdukacijeMin = trajanjeEdukacijeMin;
 	}
 

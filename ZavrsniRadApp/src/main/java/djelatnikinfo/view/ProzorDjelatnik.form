@@ -52,7 +52,7 @@
                               <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
                               <Component id="txtDovuciOib" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="prPocetakRada" alignment="0" min="-2" pref="164" max="-2" attributes="0"/>
+                          <Component id="dpPocetakRada" alignment="0" min="-2" pref="164" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="0" pref="169" max="32767" attributes="0"/>
                   </Group>
@@ -102,7 +102,7 @@
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="prPocetakRada" min="-2" max="-2" attributes="0"/>
+                      <Component id="dpPocetakRada" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
                       <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -256,7 +256,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtDovuciOibActionPerformed"/>
       </Events>
     </Component>
-    <Component class="com.github.lgooddatepicker.components.DatePicker" name="prPocetakRada">
+    <Component class="com.github.lgooddatepicker.components.DatePicker" name="dpPocetakRada">
     </Component>
   </SubComponents>
 </Form>

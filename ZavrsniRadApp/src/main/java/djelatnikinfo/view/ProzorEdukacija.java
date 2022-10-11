@@ -7,10 +7,13 @@ package djelatnikinfo.view;
 import com.github.lgooddatepicker.components.DatePickerSettings;
 import djelatnikinfo.controller.ObradaEdukacija;
 import djelatnikinfo.model.Edukacija;
+import djelatnikinfo.util.AppException;
 import djelatnikinfo.util.Pomocno;
-import java.text.DecimalFormat;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.Locale;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -20,7 +23,7 @@ public class ProzorEdukacija extends javax.swing.JFrame {
     
     private ObradaEdukacija obrada;
     private int selectedIndex = 0;
-    private DecimalFormat nf;
+    
     /**
      * Creates new form ProzorEdukacija
      */
@@ -80,8 +83,11 @@ public class ProzorEdukacija extends javax.swing.JFrame {
         txtVoditeljEdukacije = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         txtTrajanjeEdukacije = new javax.swing.JTextField();
+        btnDodaj = new javax.swing.JButton();
+        btnPromjeni = new javax.swing.JButton();
+        btnObrisi = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         lstEntiteti.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         lstEntiteti.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
@@ -97,49 +103,85 @@ public class ProzorEdukacija extends javax.swing.JFrame {
 
         jLabel3.setText("Voditelj edukacije");
 
-        jLabel4.setText("Trajanje edukacije");
+        jLabel4.setText("Trajanje edukacije (min)");
+
+        btnDodaj.setText("Dodaj");
+        btnDodaj.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDodajActionPerformed(evt);
+            }
+        });
+
+        btnPromjeni.setText("Promjeni");
+        btnPromjeni.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPromjeniActionPerformed(evt);
+            }
+        });
+
+        btnObrisi.setText("Obrisi");
+        btnObrisi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnObrisiActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel1)
-                    .addComponent(txtNaziv)
-                    .addComponent(dpDatum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3)
-                    .addComponent(txtVoditeljEdukacije)
-                    .addComponent(jLabel4)
-                    .addComponent(txtTrajanjeEdukacije, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE))
-                .addGap(0, 522, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jLabel1)
+                                .addComponent(txtNaziv, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)
+                                .addComponent(jLabel2)
+                                .addComponent(jLabel3)
+                                .addComponent(txtVoditeljEdukacije)
+                                .addComponent(jLabel4)
+                                .addComponent(txtTrajanjeEdukacije, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(dpDatum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(99, 99, 99)
+                        .addComponent(btnDodaj)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnPromjeni)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnObrisi)))
+                .addContainerGap(482, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 122, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtNaziv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2)
-                .addGap(12, 12, 12)
-                .addComponent(dpDatum, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtVoditeljEdukacije, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtTrajanjeEdukacije, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtNaziv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(dpDatum, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtVoditeljEdukacije, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel4)
+                        .addGap(12, 12, 12)
+                        .addComponent(txtTrajanjeEdukacije, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(27, 27, 27)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnDodaj)
+                    .addComponent(btnPromjeni)
+                    .addComponent(btnObrisi))
+                .addGap(0, 73, Short.MAX_VALUE))
         );
 
         pack();
@@ -155,16 +197,93 @@ public class ProzorEdukacija extends javax.swing.JFrame {
        popuniView();
     }//GEN-LAST:event_lstEntitetiValueChanged
 
+    private void btnDodajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDodajActionPerformed
+      obrada.setEntitet(new Edukacija());
+      popuniModel();
+      
+        try {
+            obrada.create();
+            selectedIndex = lstEntiteti.getModel().getSize();
+            ucitaj();
+        } catch (AppException ex) {
+            JOptionPane.showMessageDialog(rootPane, ex.getPoruka());
+        }
+      
+      
+      
+      
+    }//GEN-LAST:event_btnDodajActionPerformed
+
+    private void btnPromjeniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPromjeniActionPerformed
+        if(obrada.getEntitet()== null){
+            JOptionPane.showMessageDialog(rootPane, "Prvo  odaberite  stavku za  promjenu");
+            return;
+        }
+        popuniModel();
+        
+        try {
+            obrada.update();
+            selectedIndex=lstEntiteti.getSelectedIndex();
+            ucitaj();
+        } catch (AppException ex) {
+            JOptionPane.showMessageDialog(rootPane, ex.getPoruka());
+        }
+    }//GEN-LAST:event_btnPromjeniActionPerformed
+
+    private void btnObrisiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnObrisiActionPerformed
+       if(obrada.getEntitet()==null){
+           JOptionPane.showMessageDialog(rootPane, "Prvo odaberite stavku  za brisanje");
+           return;
+       }
+       
+       popuniModel();
+       
+        try {
+            obrada.delete();
+            selectedIndex=lstEntiteti.getSelectedIndex()-1;
+            if(selectedIndex < 0){
+                selectedIndex = 0;
+            }
+            ucitaj();
+        } catch (AppException ex) {
+            JOptionPane.showMessageDialog(rootPane, ex.getPoruka());
+        }
+       
+       
+       
+    }//GEN-LAST:event_btnObrisiActionPerformed
+
+    private void popuniModel(){
+        var d = obrada.getEntitet();
+        d.setNaziv(txtNaziv.getText());
+        d.setDatum(dpDatum.getDate() != null
+                ? Date.from(dpDatum.getDate()
+                        .atStartOfDay()
+                        .atZone(ZoneId.systemDefault())
+                        .toInstant()
+                ) : null
+        );
+        
+        d.setVoditeljEdukacije(txtVoditeljEdukacije.getText());
+        try {
+            d.setTrajanjeEdukacijeMin(Integer.parseInt(txtTrajanjeEdukacije.getText()));
+        } catch (Exception e) {
+            
+        }
+        
+
+        
+    }
+    
+    
+    
+    
    private void popuniView(){
        var d = obrada.getEntitet();
        txtNaziv.setText(d.getNaziv());
        Pomocno.postaviDatum(dpDatum, d.getDatum());
        txtVoditeljEdukacije.setText(d.getVoditeljEdukacije());
-        try {
-            txtTrajanjeEdukacije.setText(nf.format(d.getTrajanjeEdukacijeMin()));
-        } catch (Exception e) {
-
-        }
+       txtTrajanjeEdukacije.setText(String.valueOf(d.getTrajanjeEdukacijeMin()));
               
        
        
@@ -172,6 +291,9 @@ public class ProzorEdukacija extends javax.swing.JFrame {
    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnDodaj;
+    private javax.swing.JButton btnObrisi;
+    private javax.swing.JButton btnPromjeni;
     private com.github.lgooddatepicker.components.DatePicker dpDatum;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
