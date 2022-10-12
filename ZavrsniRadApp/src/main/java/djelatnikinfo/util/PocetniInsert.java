@@ -150,7 +150,8 @@ public class PocetniInsert {
 
     private void kreirajEdukacije() {
         edukacije.add(kreirajPrvuEdukaciju(djelatnici));
-
+        edukacije.add(kreirajDruguEdukaciju(djelatnici));
+        edukacije.add(kreirajTrecuEdukaciju(djelatnici));
     }
 
     private Edukacija kreirajPrvuEdukaciju(List<Djelatnik>djelatnici) {
@@ -158,24 +159,92 @@ public class PocetniInsert {
         a.setNaziv("Sigurnost hrane");
         a.setDatum(new Date());
         a.setVoditeljEdukacije("Igor Đuza");
-        a.setTrajanjeEdukacijeMin(Integer.valueOf(38));
+        a.setTrajanjeEdukacijeMin(38);
        
         sess.persist(a);
         
        DjelatnikEdukacija de = new DjelatnikEdukacija();
        de.setEdukacija(a);
-       for(int i=0;i<djelatnici.size();i++){
        de.setDjelatnik(djelatnici.get(0));
-       de.setDjelatnik(djelatnici.get(1));
-       de.setDjelatnik(djelatnici.get(3));
+       DjelatnikEdukacija ed = new DjelatnikEdukacija();
+       ed.setEdukacija(a);
+       ed.setDjelatnik(djelatnici.get(1));
+       DjelatnikEdukacija ad = new DjelatnikEdukacija();
+       ad.setEdukacija(a);
+       ad.setDjelatnik(djelatnici.get(3));
        sess.persist(de);
-       }
-       
+       sess.persist(ed);
+       sess.persist(ad);
        a.getDjelatniciNaEdukacijama().add(de);
-    
+       a.getDjelatniciNaEdukacijama().add(ed);
+       a.getDjelatniciNaEdukacijama().add(ad);
        sess.persist(a);
+
        return a;
     }
+    
+    
+     private Edukacija kreirajDruguEdukaciju(List<Djelatnik>djelatnici) {
+        Edukacija a = new Edukacija();
+        a.setNaziv("Metal detektor");
+        a.setDatum(new Date());
+        a.setVoditeljEdukacije("Mario Šteko");
+        a.setTrajanjeEdukacijeMin(60);
+       
+        sess.persist(a);
+        
+       DjelatnikEdukacija de = new DjelatnikEdukacija();
+       de.setEdukacija(a);
+       de.setDjelatnik(djelatnici.get(1));
+       DjelatnikEdukacija ed = new DjelatnikEdukacija();
+       ed.setEdukacija(a);
+       ed.setDjelatnik(djelatnici.get(2));
+       DjelatnikEdukacija ad = new DjelatnikEdukacija();
+       ad.setEdukacija(a);
+       ad.setDjelatnik(djelatnici.get(4));
+       sess.persist(de);
+       sess.persist(ed);
+       sess.persist(ad);
+       a.getDjelatniciNaEdukacijama().add(de);
+       a.getDjelatniciNaEdukacijama().add(ed);
+       a.getDjelatniciNaEdukacijama().add(ad);
+       sess.persist(a);
+
+       return a;
+    }
+     
+      private Edukacija kreirajTrecuEdukaciju(List<Djelatnik>djelatnici) {
+        Edukacija a = new Edukacija();
+        a.setNaziv("Alergeni");
+        a.setDatum(new Date());
+        a.setVoditeljEdukacije("Igor Đuza");
+        a.setTrajanjeEdukacijeMin(45);
+       
+        sess.persist(a);
+        
+       DjelatnikEdukacija de = new DjelatnikEdukacija();
+       de.setEdukacija(a);
+       de.setDjelatnik(djelatnici.get(2));
+       DjelatnikEdukacija ed = new DjelatnikEdukacija();
+       ed.setEdukacija(a);
+       ed.setDjelatnik(djelatnici.get(3));
+       DjelatnikEdukacija ad = new DjelatnikEdukacija();
+       ad.setEdukacija(a);
+       ad.setDjelatnik(djelatnici.get(4));
+       sess.persist(de);
+       sess.persist(ed);
+       sess.persist(ad);
+       a.getDjelatniciNaEdukacijama().add(de);
+       a.getDjelatniciNaEdukacijama().add(ed);
+       a.getDjelatniciNaEdukacijama().add(ad);
+        sess.persist(a);
+
+       return a;
+    }
+     
+     
+     
+     
 
     private void kreirajMobitele() {
         
