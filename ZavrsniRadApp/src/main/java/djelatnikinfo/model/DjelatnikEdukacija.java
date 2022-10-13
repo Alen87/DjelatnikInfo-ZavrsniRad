@@ -2,7 +2,7 @@ package djelatnikinfo.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
-import java.math.BigDecimal;
+
 
 @Entity
 public class DjelatnikEdukacija extends Entitet {
@@ -11,13 +11,13 @@ public class DjelatnikEdukacija extends Entitet {
     private Djelatnik djelatnik;
     @ManyToOne
     private Edukacija edukacija;
-    private BigDecimal ocijena;
+    private String ocijena;
 
     public DjelatnikEdukacija() {
         super();
     }
 
-    public DjelatnikEdukacija(Integer sifra, Djelatnik djelatnik, Edukacija edukacija, BigDecimal ocijena) {
+    public DjelatnikEdukacija(Integer sifra, Djelatnik djelatnik, Edukacija edukacija, String ocijena) {
         super(sifra);
         this.djelatnik = djelatnik;
         this.edukacija = edukacija;
@@ -40,11 +40,11 @@ public class DjelatnikEdukacija extends Entitet {
         this.edukacija = edukacija;
     }
 
-    public BigDecimal getOcijena() {
+    public String getOcijena() {
         return ocijena;
     }
 
-    public void setOcijena(BigDecimal ocijena) {
+    public void setOcijena(String ocijena) {
         this.ocijena = ocijena;
     }
 

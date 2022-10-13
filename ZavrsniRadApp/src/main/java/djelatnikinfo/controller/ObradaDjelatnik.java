@@ -20,6 +20,15 @@ public class ObradaDjelatnik extends Obrada<Djelatnik> {
         return session.createQuery("from Djelatnik", Djelatnik.class).list();
     }
 
+ 
+    public List<Djelatnik> read(String uvjet) {
+        return session.createQuery("from Djelatnik p where "
+                + " lower(concat(p.ime,' ',p.prezime)) like :uvjet", Djelatnik.class)
+                .setParameter("uvjet", "%" + uvjet.toLowerCase() + "%")
+                .setMaxResults(5)
+                .list();
+    }
+
     @Override
     protected void kontrolaCreate() throws AppException {
         kontrolaIme();

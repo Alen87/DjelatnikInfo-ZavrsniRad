@@ -166,12 +166,15 @@ public class PocetniInsert {
        DjelatnikEdukacija de = new DjelatnikEdukacija();
        de.setEdukacija(a);
        de.setDjelatnik(djelatnici.get(0));
+       de.setOcijena("Odličan");
        DjelatnikEdukacija ed = new DjelatnikEdukacija();
        ed.setEdukacija(a);
        ed.setDjelatnik(djelatnici.get(1));
+       ed.setOcijena("Vrlo dobar");
        DjelatnikEdukacija ad = new DjelatnikEdukacija();
        ad.setEdukacija(a);
        ad.setDjelatnik(djelatnici.get(3));
+       ad.setOcijena("Dobar");
        sess.persist(de);
        sess.persist(ed);
        sess.persist(ad);
