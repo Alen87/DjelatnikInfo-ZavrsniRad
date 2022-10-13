@@ -13,6 +13,7 @@ import djelatnikinfo.model.Edukacija;
 import djelatnikinfo.util.AppException;
 import djelatnikinfo.util.Pomocno;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 import javax.swing.DefaultListModel;
@@ -102,6 +103,8 @@ public class ProzorEdukacija extends javax.swing.JFrame {
         lstDjelatniciUBazi = new javax.swing.JList<>();
         txtUvjet = new javax.swing.JTextField();
         btnTraziDjelatnika = new javax.swing.JButton();
+        btnDodajDjelatnike = new javax.swing.JButton();
+        btnObrisiDjelatnike = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -173,6 +176,20 @@ public class ProzorEdukacija extends javax.swing.JFrame {
             }
         });
 
+        btnDodajDjelatnike.setText("<");
+        btnDodajDjelatnike.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDodajDjelatnikeActionPerformed(evt);
+            }
+        });
+
+        btnObrisiDjelatnike.setText(">");
+        btnObrisiDjelatnike.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnObrisiDjelatnikeActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -201,20 +218,24 @@ public class ProzorEdukacija extends javax.swing.JFrame {
                         .addComponent(btnObrisi)))
                 .addGap(44, 44, 44)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(40, 40, 40)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(134, 134, 134)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(txtUvjet)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnTraziDjelatnika, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(btnDodajDjelatnike, javax.swing.GroupLayout.DEFAULT_SIZE, 55, Short.MAX_VALUE)
+                            .addComponent(btnObrisiDjelatnike, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(39, 39, 39)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(txtUvjet, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(btnTraziDjelatnika, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(84, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -258,17 +279,23 @@ public class ProzorEdukacija extends javax.swing.JFrame {
                         .addGap(6, 6, 6)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel7)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(txtUvjet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(btnTraziDjelatnika))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(47, 47, 47)
+                                        .addComponent(btnDodajDjelatnike)
+                                        .addGap(40, 40, 40)
+                                        .addComponent(btnObrisiDjelatnike)))))
                         .addContainerGap(145, Short.MAX_VALUE))))
         );
 
@@ -368,6 +395,47 @@ public class ProzorEdukacija extends javax.swing.JFrame {
        lstDjelatniciUBazi.setModel(new DjelatnikListModel<>(obradaDjelatnik.read(txtUvjet.getText().trim())));
     }//GEN-LAST:event_btnTraziDjelatnikaActionPerformed
 
+    private void btnDodajDjelatnikeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDodajDjelatnikeActionPerformed
+        if(lstEntiteti.getSelectedValue()==null){
+            JOptionPane.showMessageDialog(rootPane, "Prvo odaberite edukaciju s lijeve strane");
+            return;
+        }
+        
+      DefaultListModel<DjelatnikEdukacija> m = (DefaultListModel<DjelatnikEdukacija>) lstDjelatniciNaEdukaciji.getModel();
+      
+      
+      DjelatnikEdukacija de;
+      
+       for(Djelatnik d : lstDjelatniciUBazi.getSelectedValuesList()){
+             de = new DjelatnikEdukacija();
+             de.setEdukacija(obrada.getEntitet());
+             de.setDjelatnik(d);
+             de.setOcijena("");
+             m.addElement(de);
+           
+           
+       }
+        
+        lstDjelatniciNaEdukaciji.repaint();
+        
+    }//GEN-LAST:event_btnDodajDjelatnikeActionPerformed
+
+    private void btnObrisiDjelatnikeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnObrisiDjelatnikeActionPerformed
+       
+        DefaultListModel<DjelatnikEdukacija> m = (DefaultListModel<DjelatnikEdukacija>) lstDjelatniciNaEdukaciji.getModel();
+        
+        for(DjelatnikEdukacija de : lstDjelatniciNaEdukaciji.getSelectedValuesList()){
+            
+            m.removeElement(de);
+            
+        }
+        
+        
+        lstDjelatniciNaEdukaciji.repaint();
+        
+        
+    }//GEN-LAST:event_btnObrisiDjelatnikeActionPerformed
+
     private void popuniModel(){
         var d = obrada.getEntitet();
         d.setNaziv(txtNaziv.getText());
@@ -385,8 +453,18 @@ public class ProzorEdukacija extends javax.swing.JFrame {
         } catch (Exception e) {
             
         }
+        try {
+            d.setTrajanjeEdukacijeMin(Integer.parseInt(txtTrajanjeEdukacije.getText()));
+        } catch (Exception e) {
+            d.setTrajanjeEdukacijeMin(0);
+        }
         
-
+        
+        DefaultListModel<DjelatnikEdukacija> m = (DefaultListModel<DjelatnikEdukacija>) lstDjelatniciNaEdukaciji.getModel();
+        d.setDjelatniciNaEdukacijama(new ArrayList<>());
+        for(int i = 0;i<m.getSize();i++){
+            d.getDjelatniciNaEdukacijama().add(m.getElementAt(i));
+        }
         
     }
     
@@ -407,7 +485,9 @@ public class ProzorEdukacija extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDodaj;
+    private javax.swing.JButton btnDodajDjelatnike;
     private javax.swing.JButton btnObrisi;
+    private javax.swing.JButton btnObrisiDjelatnike;
     private javax.swing.JButton btnPromjeni;
     private javax.swing.JButton btnTraziDjelatnika;
     private com.github.lgooddatepicker.components.DatePicker dpDatum;

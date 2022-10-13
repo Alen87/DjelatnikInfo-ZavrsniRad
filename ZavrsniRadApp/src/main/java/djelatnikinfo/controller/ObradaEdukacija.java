@@ -18,6 +18,20 @@ import djelatnikinfo.util.Pomocno;
 public class ObradaEdukacija extends Obrada<Edukacija> {
 
     @Override
+    public void update() throws AppException {
+        kontrolaUpdate();
+        session.beginTransaction();
+        
+        for (DjelatnikEdukacija de : entitet.getDjelatniciNaEdukacijama()) {
+            session.persist(de);
+
+        }
+        session.persist(entitet);
+        session.getTransaction().commit();
+
+    }
+
+    @Override
     public List<Edukacija> read() {
         return session.createQuery("from Edukacija", Edukacija.class).list();
     }
