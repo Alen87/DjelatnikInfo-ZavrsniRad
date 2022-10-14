@@ -18,15 +18,40 @@ import java.util.ArrayList;
  */
 public class ObradaEdukacija extends Obrada<Edukacija> {
 
+    private List<DjelatnikEdukacija> noviDjelatniciNaEdukacijama;
+
+    @Override
+    public void create() throws AppException {
+
+        kontrolaCreate();
+        session.beginTransaction();
+        session.persist(entitet);
+
+        for (DjelatnikEdukacija de : noviDjelatniciNaEdukacijama) {
+            de.setEdukacija(entitet);
+            session.persist(de);
+        }
+
+        entitet.setDjelatniciNaEdukacijama(noviDjelatniciNaEdukacijama);
+
+        session.getTransaction().commit();
+
+    }
+
     @Override
     public void update() throws AppException {
-       // kontrolaUpdate();
+        kontrolaUpdate();
         session.beginTransaction();
-        
+
         for (DjelatnikEdukacija de : entitet.getDjelatniciNaEdukacijama()) {
-            session.persist(de);
+            session.remove(de);
 
         }
+        for (DjelatnikEdukacija de : noviDjelatniciNaEdukacijama) {
+            session.persist(de);
+        }
+
+        entitet.setDjelatniciNaEdukacijama(noviDjelatniciNaEdukacijama);
         session.persist(entitet);
         session.getTransaction().commit();
 
@@ -66,14 +91,6 @@ public class ObradaEdukacija extends Obrada<Edukacija> {
     protected String getNazivEntiteta() {
         return "Edukacija";
     }
-    
-    
-    public void prijePromjeneKontrola() throws AppException {
-        kontrolaUpdate();
-        
-    }
-    
-    
 
     private void kontrolaNaziv() throws AppException {
         kontrolaNazivMoraBitiUnesen();
@@ -81,7 +98,7 @@ public class ObradaEdukacija extends Obrada<Edukacija> {
 
     private void kontrolaNazivMoraBitiUnesen() throws AppException {
         if (entitet.getNaziv() == null || entitet.getNaziv().trim().isEmpty()) {
-            throw new AppException("Naziv  mora biti  unesen");
+            throw new AppException("Naziv obavezno");
         }
     }
 
@@ -96,18 +113,12 @@ public class ObradaEdukacija extends Obrada<Edukacija> {
 
     }
 
-    public void pocistiDjelatnike() {
-       session.beginTransaction();
-       for(DjelatnikEdukacija de : entitet.getDjelatniciNaEdukacijama()){
-           session.remove(de);
-       }
-        session.getTransaction().commit();
-        entitet.setDjelatniciNaEdukacijama(new ArrayList<>());
-       
-       
-       
+    public List<DjelatnikEdukacija> getNoviDjelatniciNaEdukacijama() {
+        return noviDjelatniciNaEdukacijama;
     }
 
-   
+    public void setNoviDjelatniciNaEdukacijama(List<DjelatnikEdukacija> noviDjelatniciNaEdukacijama) {
+        this.noviDjelatniciNaEdukacijama = noviDjelatniciNaEdukacijama;
+    }
 
 }

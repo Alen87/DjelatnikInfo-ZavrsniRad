@@ -302,6 +302,9 @@
               <StringArray count="0"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lstDjelatniciUBaziMouseClicked"/>
+          </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Djelatnik&gt;"/>
           </AuxValues>
@@ -309,6 +312,9 @@
       </SubComponents>
     </Container>
     <Component class="javax.swing.JTextField" name="txtUvjet">
+      <Events>
+        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtUvjetKeyPressed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnTraziDjelatnika">
       <Properties>

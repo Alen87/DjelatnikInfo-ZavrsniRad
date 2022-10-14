@@ -12,9 +12,11 @@ import djelatnikinfo.model.DjelatnikEdukacija;
 import djelatnikinfo.model.Edukacija;
 import djelatnikinfo.util.AppException;
 import djelatnikinfo.util.Pomocno;
+import java.awt.event.KeyEvent;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
@@ -24,11 +26,10 @@ import javax.swing.JOptionPane;
  * @author Alen
  */
 public class ProzorEdukacija extends javax.swing.JFrame {
-    
+
     private ObradaEdukacija obrada;
     private ObradaDjelatnik obradaDjelatnik;
-    private int selectedIndex = 0;
-    
+
     /**
      * Creates new form ProzorEdukacija
      */
@@ -36,30 +37,26 @@ public class ProzorEdukacija extends javax.swing.JFrame {
         initComponents();
         obrada = new ObradaEdukacija();
         obradaDjelatnik = new ObradaDjelatnik();
-        selectedIndex =0;
         postavke();
         ucitaj();
-        
+
     }
 
-    private void postavke(){
-        
+    private void postavke() {
+
         setTitle(Pomocno.NAZIV_APLIKACIJE + " " + " Edukacije");
         prilagodiDatePicker();
-        
+
+        lstDjelatniciNaEdukaciji.setModel(new DefaultListModel<>());
+
     }
-    
-    
-    private void ucitaj(){
-        
-       lstEntiteti.setModel(new DjelatnikListModel<>(obrada.read()));
-       if(lstEntiteti.getModel().getSize()>0){
-           lstEntiteti.setSelectedIndex(selectedIndex);
-       }
-                
+
+    private void ucitaj() {
+
+        lstEntiteti.setModel(new DjelatnikListModel<>(obrada.read()));
+
     }
-    
-    
+
     private void prilagodiDatePicker() {
         DatePickerSettings dps = new DatePickerSettings(new Locale("hr", "HR"));
         dps.setFormatForDatesCommonEra(Pomocno.FORMAT_DATUMA);
@@ -67,9 +64,7 @@ public class ProzorEdukacija extends javax.swing.JFrame {
         dps.setTranslationToday("Danas");
         dpDatum.setSettings(dps);
     }
-    
-    
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -167,7 +162,18 @@ public class ProzorEdukacija extends javax.swing.JFrame {
 
         jLabel7.setText("Djelatnici u bazi");
 
+        lstDjelatniciUBazi.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lstDjelatniciUBaziMouseClicked(evt);
+            }
+        });
         jScrollPane4.setViewportView(lstDjelatniciUBazi);
+
+        txtUvjet.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtUvjetKeyPressed(evt);
+            }
+        });
 
         btnTraziDjelatnika.setText("Traži");
         btnTraziDjelatnika.addActionListener(new java.awt.event.ActionListener() {
@@ -303,52 +309,40 @@ public class ProzorEdukacija extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void lstEntitetiValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstEntitetiValueChanged
-       if(evt.getValueIsAdjusting() || lstEntiteti.getSelectedValue()==null){
-           return;
-       }
-       
-       obrada.setEntitet(lstEntiteti.getSelectedValue());
-       
-       popuniView();
+        if (evt.getValueIsAdjusting() || lstEntiteti.getSelectedValue() == null) {
+            return;
+        }
+
+        obrada.setEntitet(lstEntiteti.getSelectedValue());
+
+        popuniView();
     }//GEN-LAST:event_lstEntitetiValueChanged
 
     private void btnDodajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDodajActionPerformed
-      obrada.setEntitet(new Edukacija());
-      popuniModel();
-      
+        obrada.setEntitet(new Edukacija());
+        popuniModel();
+
         try {
             obrada.create();
-            selectedIndex = lstEntiteti.getModel().getSize();
             ucitaj();
         } catch (AppException ex) {
             JOptionPane.showMessageDialog(rootPane, ex.getPoruka());
         }
-      
-      
-      
-      
+
+
     }//GEN-LAST:event_btnDodajActionPerformed
 
     private void btnPromjeniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPromjeniActionPerformed
-        if(obrada.getEntitet()== null){
+        if (obrada.getEntitet() == null) {
             JOptionPane.showMessageDialog(rootPane, "Prvo  odaberite  stavku za  promjenu");
             return;
         }
-        
-        try {
-            obrada.prijePromjeneKontrola();
-        } catch (AppException e) {
-            JOptionPane.showMessageDialog(rootPane, e.getPoruka());
-        }
-        
-        
-        
-        
+
         popuniModel();
-        
+
         try {
             obrada.update();
-            selectedIndex=lstEntiteti.getSelectedIndex();
+
             ucitaj();
         } catch (AppException ex) {
             JOptionPane.showMessageDialog(rootPane, ex.getPoruka());
@@ -356,26 +350,22 @@ public class ProzorEdukacija extends javax.swing.JFrame {
     }//GEN-LAST:event_btnPromjeniActionPerformed
 
     private void btnObrisiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnObrisiActionPerformed
-       if(obrada.getEntitet()==null){
-           JOptionPane.showMessageDialog(rootPane, "Prvo odaberite stavku  za brisanje");
-           return;
-       }
-       
-       popuniModel();
-       
+        if (obrada.getEntitet() == null) {
+            JOptionPane.showMessageDialog(rootPane, "Prvo odaberite stavku  za brisanje");
+            return;
+        }
+
+        popuniModel();
+
         try {
             obrada.delete();
-            selectedIndex=lstEntiteti.getSelectedIndex()-1;
-            if(selectedIndex < 0){
-                selectedIndex = 0;
-            }
+
             ucitaj();
         } catch (AppException ex) {
             JOptionPane.showMessageDialog(rootPane, ex.getPoruka());
         }
-       
-       
-       
+
+
     }//GEN-LAST:event_btnObrisiActionPerformed
 
     private void lstDjelatniciNaEdukacijiValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstDjelatniciNaEdukacijiValueChanged
@@ -384,69 +374,88 @@ public class ProzorEdukacija extends javax.swing.JFrame {
             return;
         }
 
-       taOcijena.setText(lstDjelatniciNaEdukaciji.getSelectedValue().getOcijena());
-                
+        taOcijena.setText(lstDjelatniciNaEdukaciji.getSelectedValue().getOcijena());
+
     }//GEN-LAST:event_lstDjelatniciNaEdukacijiValueChanged
 
     private void taOcijenaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_taOcijenaKeyTyped
-     if(lstDjelatniciNaEdukaciji.getSelectedValue() == null){
+        if (lstDjelatniciNaEdukaciji.getSelectedValue() == null) {
             return;
         }
-        
-       var s = taOcijena.getText() + evt.getKeyChar();
-           s=s.replace((char)22,(char) 0);
-           
-           
-       lstDjelatniciNaEdukaciji.getSelectedValue().setOcijena(s);
-        
+
+        var s = taOcijena.getText() + evt.getKeyChar();
+        s = s.replace((char) 22, (char) 0);
+
+        lstDjelatniciNaEdukaciji.getSelectedValue().setOcijena(s);
+
     }//GEN-LAST:event_taOcijenaKeyTyped
 
     private void btnTraziDjelatnikaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTraziDjelatnikaActionPerformed
-       lstDjelatniciUBazi.setModel(new DjelatnikListModel<>(obradaDjelatnik.read(txtUvjet.getText().trim())));
+        lstDjelatniciUBazi.setModel(new DjelatnikListModel<>(obradaDjelatnik.read(txtUvjet.getText().trim())));
     }//GEN-LAST:event_btnTraziDjelatnikaActionPerformed
 
     private void btnDodajDjelatnikeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDodajDjelatnikeActionPerformed
-        if(lstEntiteti.getSelectedValue()==null){
-            JOptionPane.showMessageDialog(rootPane, "Prvo odaberite edukaciju s lijeve strane");
-            return;
+
+        DefaultListModel<DjelatnikEdukacija> m = (DefaultListModel<DjelatnikEdukacija>) lstDjelatniciNaEdukaciji.getModel();
+
+       
+
+        for (Djelatnik d : lstDjelatniciUBazi.getSelectedValuesList()) {
+           
+            m.addElement(kreirajDjelatnikeNaEdukacijama(obrada.getEntitet(), d, ""));
+
         }
-        
-      DefaultListModel<DjelatnikEdukacija> m = (DefaultListModel<DjelatnikEdukacija>) lstDjelatniciNaEdukaciji.getModel();
-      
-      
-      DjelatnikEdukacija de;
-      
-       for(Djelatnik d : lstDjelatniciUBazi.getSelectedValuesList()){
-             de = new DjelatnikEdukacija();
-             de.setEdukacija(obrada.getEntitet());
-             de.setDjelatnik(d);
-             de.setOcijena("");
-             m.addElement(de);
-           
-           
-       }
-        
+
         lstDjelatniciNaEdukaciji.repaint();
-        
+
     }//GEN-LAST:event_btnDodajDjelatnikeActionPerformed
 
+    private DjelatnikEdukacija kreirajDjelatnikeNaEdukacijama(Edukacija e, Djelatnik d, String n) {
+        DjelatnikEdukacija de = new DjelatnikEdukacija();
+        de.setEdukacija(e);
+        de.setDjelatnik(d);
+        de.setOcijena(n);
+
+        return de;
+    }
+
+    
+    
     private void btnObrisiDjelatnikeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnObrisiDjelatnikeActionPerformed
-       
+
         DefaultListModel<DjelatnikEdukacija> m = (DefaultListModel<DjelatnikEdukacija>) lstDjelatniciNaEdukaciji.getModel();
-        
-        for(DjelatnikEdukacija de : lstDjelatniciNaEdukaciji.getSelectedValuesList()){
-            
+
+        for (DjelatnikEdukacija de : lstDjelatniciNaEdukaciji.getSelectedValuesList()) {
+
             m.removeElement(de);
-            
+
         }
-        
-        
+
         lstDjelatniciNaEdukaciji.repaint();
-        
-        
+
+
     }//GEN-LAST:event_btnObrisiDjelatnikeActionPerformed
 
-    private void popuniModel(){
+    private void lstDjelatniciUBaziMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lstDjelatniciUBaziMouseClicked
+       if(evt.getClickCount() != 2){
+           return;
+       }
+       
+       DefaultListModel<DjelatnikEdukacija> m = (DefaultListModel<DjelatnikEdukacija>) lstDjelatniciNaEdukaciji.getModel();
+       m.addElement(kreirajDjelatnikeNaEdukacijama(obrada.getEntitet(), lstDjelatniciUBazi.getSelectedValue(), ""));
+       
+    }//GEN-LAST:event_lstDjelatniciUBaziMouseClicked
+
+    private void txtUvjetKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUvjetKeyPressed
+       if(evt.getKeyCode()!=KeyEvent.VK_ENTER){
+           return;
+       }
+       
+        btnTraziDjelatnikaActionPerformed(null);
+       
+    }//GEN-LAST:event_txtUvjetKeyPressed
+
+    private void popuniModel() {
         var d = obrada.getEntitet();
         d.setNaziv(txtNaziv.getText());
         d.setDatum(dpDatum.getDate() != null
@@ -456,43 +465,38 @@ public class ProzorEdukacija extends javax.swing.JFrame {
                         .toInstant()
                 ) : null
         );
-        
+
         d.setVoditeljEdukacije(txtVoditeljEdukacije.getText());
         try {
             d.setTrajanjeEdukacijeMin(Integer.parseInt(txtTrajanjeEdukacije.getText()));
         } catch (Exception e) {
-            
+
         }
         try {
             d.setTrajanjeEdukacijeMin(Integer.parseInt(txtTrajanjeEdukacije.getText()));
         } catch (Exception e) {
             d.setTrajanjeEdukacijeMin(0);
         }
-        
-        
+
         DefaultListModel<DjelatnikEdukacija> m = (DefaultListModel<DjelatnikEdukacija>) lstDjelatniciNaEdukaciji.getModel();
-        
-         obrada.pocistiDjelatnike();
-        for(int i = 0;i<m.getSize();i++){
-            d.getDjelatniciNaEdukacijama().add(m.getElementAt(i));
+
+        List<DjelatnikEdukacija> noviDjelatniciNaEdukacijama = new ArrayList<>();
+        for (int i = 0; i < m.getSize(); i++) {
+            noviDjelatniciNaEdukacijama.add(m.getElementAt(i));
         }
-        
+        obrada.setNoviDjelatniciNaEdukacijama(noviDjelatniciNaEdukacijama);
     }
-    
-    
-    
-    
-   private void popuniView(){
-       var d = obrada.getEntitet();
-       txtNaziv.setText(d.getNaziv());
-       Pomocno.postaviDatum(dpDatum, d.getDatum());
-       txtVoditeljEdukacije.setText(d.getVoditeljEdukacije());
-       txtTrajanjeEdukacije.setText(String.valueOf(d.getTrajanjeEdukacijeMin()));
-              
-       lstDjelatniciNaEdukaciji.setModel(new DjelatnikListModel<>(d.getDjelatniciNaEdukacijama()));
-       
-       
-   }
+
+    private void popuniView() {
+        var d = obrada.getEntitet();
+        txtNaziv.setText(d.getNaziv());
+        Pomocno.postaviDatum(dpDatum, d.getDatum());
+        txtVoditeljEdukacije.setText(d.getVoditeljEdukacije());
+        txtTrajanjeEdukacije.setText(String.valueOf(d.getTrajanjeEdukacijeMin()));
+
+        lstDjelatniciNaEdukaciji.setModel(new DjelatnikListModel<>(d.getDjelatniciNaEdukacijama()));
+
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDodaj;
@@ -523,5 +527,4 @@ public class ProzorEdukacija extends javax.swing.JFrame {
     private javax.swing.JTextField txtVoditeljEdukacije;
     // End of variables declaration//GEN-END:variables
 
-    
 }
