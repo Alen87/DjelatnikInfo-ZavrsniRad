@@ -10,6 +10,7 @@ import java.util.List;
 import djelatnikinfo.model.Edukacija;
 import djelatnikinfo.util.AppException;
 import djelatnikinfo.util.Pomocno;
+import java.util.ArrayList;
 
 /**
  *
@@ -19,7 +20,7 @@ public class ObradaEdukacija extends Obrada<Edukacija> {
 
     @Override
     public void update() throws AppException {
-        kontrolaUpdate();
+       // kontrolaUpdate();
         session.beginTransaction();
         
         for (DjelatnikEdukacija de : entitet.getDjelatniciNaEdukacijama()) {
@@ -65,6 +66,14 @@ public class ObradaEdukacija extends Obrada<Edukacija> {
     protected String getNazivEntiteta() {
         return "Edukacija";
     }
+    
+    
+    public void prijePromjeneKontrola() throws AppException {
+        kontrolaUpdate();
+        
+    }
+    
+    
 
     private void kontrolaNaziv() throws AppException {
         kontrolaNazivMoraBitiUnesen();
@@ -86,5 +95,19 @@ public class ObradaEdukacija extends Obrada<Edukacija> {
         }
 
     }
+
+    public void pocistiDjelatnike() {
+       session.beginTransaction();
+       for(DjelatnikEdukacija de : entitet.getDjelatniciNaEdukacijama()){
+           session.remove(de);
+       }
+        session.getTransaction().commit();
+        entitet.setDjelatniciNaEdukacijama(new ArrayList<>());
+       
+       
+       
+    }
+
+   
 
 }

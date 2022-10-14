@@ -334,6 +334,16 @@ public class ProzorEdukacija extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "Prvo  odaberite  stavku za  promjenu");
             return;
         }
+        
+        try {
+            obrada.prijePromjeneKontrola();
+        } catch (AppException e) {
+            JOptionPane.showMessageDialog(rootPane, e.getPoruka());
+        }
+        
+        
+        
+        
         popuniModel();
         
         try {
@@ -461,7 +471,8 @@ public class ProzorEdukacija extends javax.swing.JFrame {
         
         
         DefaultListModel<DjelatnikEdukacija> m = (DefaultListModel<DjelatnikEdukacija>) lstDjelatniciNaEdukaciji.getModel();
-        d.setDjelatniciNaEdukacijama(new ArrayList<>());
+        
+         obrada.pocistiDjelatnike();
         for(int i = 0;i<m.getSize();i++){
             d.getDjelatniciNaEdukacijama().add(m.getElementAt(i));
         }
