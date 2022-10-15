@@ -22,11 +22,14 @@ public class ObradaDjelatnik extends Obrada<Djelatnik> {
 
  
     public List<Djelatnik> read(String uvjet) {
-        return session.createQuery("from Djelatnik p where "
+         
+                return session.createQuery("from Djelatnik p where "
                 + " lower(concat(p.ime,' ',p.prezime)) like :uvjet", Djelatnik.class)
                 .setParameter("uvjet", "%" + uvjet.toLowerCase() + "%")
                 .setMaxResults(5)
                 .list();
+                
+                
     }
 
     @Override
@@ -38,7 +41,7 @@ public class ObradaDjelatnik extends Obrada<Djelatnik> {
 
     @Override
     protected void kontrolaUpdate() throws AppException {
-        
+        kontrolaCreate();
         
         
 
