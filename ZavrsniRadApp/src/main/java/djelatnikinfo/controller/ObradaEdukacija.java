@@ -19,6 +19,7 @@ import java.util.ArrayList;
 public class ObradaEdukacija extends Obrada<Edukacija> {
 
     private List<DjelatnikEdukacija> noviDjelatniciNaEdukacijama;
+    
 
     @Override
     public void create() throws AppException {
@@ -58,6 +59,28 @@ public class ObradaEdukacija extends Obrada<Edukacija> {
     }
 
     @Override
+    public void delete() throws AppException {
+        kontrolaDelete();
+          session.beginTransaction();
+
+        for (DjelatnikEdukacija de : entitet.getDjelatniciNaEdukacijama()) {
+            session.remove(de);
+
+        }
+       
+
+        
+        session.remove(entitet);
+        session.getTransaction().commit();
+        
+    }
+    
+    
+    
+    
+    
+
+    @Override
     public List<Edukacija> read() {
         return session.createQuery("from Edukacija", Edukacija.class).list();
     }
@@ -66,6 +89,7 @@ public class ObradaEdukacija extends Obrada<Edukacija> {
     protected void kontrolaCreate() throws AppException {
         kontrolaNaziv();
         kontrolaDatum();
+        
     }
 
     @Override
@@ -75,16 +99,9 @@ public class ObradaEdukacija extends Obrada<Edukacija> {
 
     @Override
     protected void kontrolaDelete() throws AppException {
-//        if (entitet.getDjelatniciNaEdukacijama() != null || entitet.getDjelatniciNaEdukacijama().size() > 0) {
-//            StringBuilder sb = new StringBuilder();
-//            sb.append("/n");
-//            for (DjelatnikEdukacija de : entitet.getDjelatniciNaEdukacijama()) {
-//                sb.append(de.getDjelatnik() + " " + de.getOcijena());
-//                sb.append("/n");
-//            }
-//            throw new AppException("Ne možete obrisati Edukaciju dok joj pripadaju djelatnici:" + sb.toString());
-//        }
-
+      if(!noviDjelatniciNaEdukacijama.isEmpty()){
+          throw new AppException("Ne može se obrisati edukacija koja  ima  djelatnike ");
+      }
     }
 
     @Override
@@ -121,4 +138,5 @@ public class ObradaEdukacija extends Obrada<Edukacija> {
         this.noviDjelatniciNaEdukacijama = noviDjelatniciNaEdukacijama;
     }
 
+   
 }

@@ -140,6 +140,11 @@ public class ProzorEdukacija extends javax.swing.JFrame {
             }
         });
 
+        lstDjelatniciNaEdukaciji.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                lstDjelatniciNaEdukacijiKeyPressed(evt);
+            }
+        });
         lstDjelatniciNaEdukaciji.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
                 lstDjelatniciNaEdukacijiValueChanged(evt);
@@ -216,13 +221,13 @@ public class ProzorEdukacija extends javax.swing.JFrame {
                                 .addComponent(txtTrajanjeEdukacije, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(dpDatum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(77, 77, 77)
+                        .addGap(60, 60, 60)
                         .addComponent(btnDodaj)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnPromjeni)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnPromjeni, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(btnObrisi)))
-                .addGap(44, 44, 44)
+                .addGap(38, 38, 38)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -359,7 +364,7 @@ public class ProzorEdukacija extends javax.swing.JFrame {
 
         try {
             obrada.delete();
-
+            pocistiView();
             ucitaj();
         } catch (AppException ex) {
             JOptionPane.showMessageDialog(rootPane, ex.getPoruka());
@@ -368,6 +373,18 @@ public class ProzorEdukacija extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnObrisiActionPerformed
 
+    private void pocistiView(){
+    txtNaziv.setText("");
+    dpDatum.setDate(null);
+    txtVoditeljEdukacije.setText("");
+    txtTrajanjeEdukacije.setText("");
+    taOcijena.setText("");
+    
+    
+}
+    
+    
+    
     private void lstDjelatniciNaEdukacijiValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstDjelatniciNaEdukacijiValueChanged
         if (evt.getValueIsAdjusting()
                 || lstDjelatniciNaEdukaciji.getSelectedValue() == null) {
@@ -391,7 +408,13 @@ public class ProzorEdukacija extends javax.swing.JFrame {
     }//GEN-LAST:event_taOcijenaKeyTyped
 
     private void btnTraziDjelatnikaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTraziDjelatnikaActionPerformed
+        
         lstDjelatniciUBazi.setModel(new DjelatnikListModel<>(obradaDjelatnik.read(txtUvjet.getText().trim())));
+       
+        try {
+            lstDjelatniciUBazi.setSelectedIndex(0);
+        } catch (Exception e) {
+        }
     }//GEN-LAST:event_btnTraziDjelatnikaActionPerformed
 
     private void btnDodajDjelatnikeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDodajDjelatnikeActionPerformed
@@ -437,23 +460,55 @@ public class ProzorEdukacija extends javax.swing.JFrame {
     }//GEN-LAST:event_btnObrisiDjelatnikeActionPerformed
 
     private void lstDjelatniciUBaziMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lstDjelatniciUBaziMouseClicked
-       if(evt.getClickCount() != 2){
+      
+        if(evt.getClickCount() != 2){
            return;
        }
+      
+       dodajDjelatnikeNaEdukaciju();
+      
+    }//GEN-LAST:event_lstDjelatniciUBaziMouseClicked
+
+    private void dodajDjelatnikeNaEdukaciju(){
+       DefaultListModel<DjelatnikEdukacija> djelatniciNaEdukacijama=(DefaultListModel<DjelatnikEdukacija>) lstDjelatniciNaEdukaciji.getModel();
+        
+       for(int i=0;i<djelatniciNaEdukacijama.getSize();i++){
+          
+           if(djelatniciNaEdukacijama.get(i).getDjelatnik().getSifra().equals(lstDjelatniciUBazi.getSelectedValue().getSifra())){
+               JOptionPane.showMessageDialog(rootPane, "Djelatnik je već  dodan na edukaciju");
+               return;
+           }
+          
+       }
+       
        
        DefaultListModel<DjelatnikEdukacija> m = (DefaultListModel<DjelatnikEdukacija>) lstDjelatniciNaEdukaciji.getModel();
        m.addElement(kreirajDjelatnikeNaEdukacijama(obrada.getEntitet(), lstDjelatniciUBazi.getSelectedValue(), ""));
-       
-    }//GEN-LAST:event_lstDjelatniciUBaziMouseClicked
-
+       txtUvjet.requestFocus();
+       txtUvjet.selectAll();
+        
+        
+    }
+    
+    
+    
     private void txtUvjetKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUvjetKeyPressed
        if(evt.getKeyCode()!=KeyEvent.VK_ENTER){
            return;
        }
        
         btnTraziDjelatnikaActionPerformed(null);
+        lstDjelatniciNaEdukaciji.requestFocus();
        
     }//GEN-LAST:event_txtUvjetKeyPressed
+
+    private void lstDjelatniciNaEdukacijiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_lstDjelatniciNaEdukacijiKeyPressed
+      if(evt.getKeyCode()!= KeyEvent.VK_ENTER ){
+          return;
+      }
+      
+      dodajDjelatnikeNaEdukaciju();
+    }//GEN-LAST:event_lstDjelatniciNaEdukacijiKeyPressed
 
     private void popuniModel() {
         var d = obrada.getEntitet();
