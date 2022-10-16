@@ -58,6 +58,8 @@ public class PocetniInsert {
         djelatnici.add(kreirajTrecegDjelatnika());
         djelatnici.add(kreirajCetvrtogDjelatnika());
         djelatnici.add(kreirajPetogDjelatnika());
+        djelatnici.add(kreirajSestogDjelatnika());
+        djelatnici.add(kreirajSedmogDjelatnika());
     }
 
     private Djelatnik kreirajPrvogDjelatnika() {
@@ -147,11 +149,54 @@ public class PocetniInsert {
         return e;
 
     }
+    
+    private Djelatnik kreirajSestogDjelatnika() {
+        Djelatnik e = new Djelatnik();
+        e.setIme("Andrej");
+        e.setPrezime("Hmura");
+        e.setOib("16150747941");
+        e.setKontakt("091/7684956");
+        e.setEmail("andrej.hmura@gmail.com");
+        e.setPocetakRada(new Date());
+        e.setLoyalityKartica("76895587405");
+        e.setRadnaOdjecaObuca("hlače 2kom 46,majica 3kom L,papuče 44");
+        e.setUgovor("Neodređeno");
+        e.setZavrsenoZanimanje("Pekar");
+
+        sess.persist(e);
+        return e;
+
+    }
+     private Djelatnik kreirajSedmogDjelatnika() {
+        Djelatnik e = new Djelatnik();
+        e.setIme("Antonio");
+        e.setPrezime("Marinović");
+        e.setOib("46134905702");
+        e.setKontakt("091/2224956");
+        e.setEmail("antonio.marinovic@gmail.com");
+        e.setPocetakRada(new Date());
+        e.setLoyalityKartica("76899857640");
+        e.setRadnaOdjecaObuca("hlače 2kom 54,majica 3kom XL,papuče 44");
+        e.setUgovor("Neodređeno");
+        e.setZavrsenoZanimanje("Ekonomist");
+
+        sess.persist(e);
+        return e;
+
+    }
+    
+    
+    
+    
+    
+    
+    
 
     private void kreirajEdukacije() {
         edukacije.add(kreirajPrvuEdukaciju(djelatnici));
         edukacije.add(kreirajDruguEdukaciju(djelatnici));
         edukacije.add(kreirajTrecuEdukaciju(djelatnici));
+        edukacije.add(kreirajCetvrtuEdukaciju(djelatnici));
     }
 
     private Edukacija kreirajPrvuEdukaciju(List<Djelatnik>djelatnici) {
@@ -245,7 +290,48 @@ public class PocetniInsert {
        return a;
     }
      
-     
+      private Edukacija kreirajCetvrtuEdukaciju(List<Djelatnik>djelatnici) {
+        Edukacija a = new Edukacija();
+        a.setNaziv("Sigurnost upravljanja strojeva");
+        a.setDatum(new Date());
+        a.setVoditeljEdukacije("Igor Đuza");
+        a.setTrajanjeEdukacijeMin(60);
+       
+        sess.persist(a);
+        
+       DjelatnikEdukacija de = new DjelatnikEdukacija();
+       de.setEdukacija(a);
+       de.setDjelatnik(djelatnici.get(5));
+       DjelatnikEdukacija ed = new DjelatnikEdukacija();
+       ed.setEdukacija(a);
+       ed.setDjelatnik(djelatnici.get(6));
+       DjelatnikEdukacija ad = new DjelatnikEdukacija();
+       ad.setEdukacija(a);
+       ad.setDjelatnik(djelatnici.get(0));
+       DjelatnikEdukacija da = new DjelatnikEdukacija();
+       da.setEdukacija(a);
+       da.setDjelatnik(djelatnici.get(2));
+       sess.persist(de);
+       sess.persist(ed);
+       sess.persist(ad);
+       sess.persist(da);
+       a.getDjelatniciNaEdukacijama().add(de);
+       a.getDjelatniciNaEdukacijama().add(ed);
+       a.getDjelatniciNaEdukacijama().add(ad);
+       a.getDjelatniciNaEdukacijama().add(da);
+        sess.persist(a);
+
+       return a;
+    }
+      
+      
+      
+      
+      
+      
+      
+      
+      
      
      
 
@@ -312,6 +398,7 @@ public class PocetniInsert {
         sanitarneIskaznice.add(kreirajTrecuSanitarnuIskaznicu(djelatnici));
         sanitarneIskaznice.add(kreirajCetvrtuSanitarnuIskaznicu(djelatnici));
         sanitarneIskaznice.add(kreirajPetuSanitarnuIskaznicu(djelatnici));
+        sanitarneIskaznice.add(kreirajSestuSanitarnuIskaznicu(djelatnici));
     }
 
     private SanitarnaIskaznica kreirajPrvuSanitarnuIskaznicu(List<Djelatnik>djelatnici) {
@@ -368,5 +455,22 @@ public class PocetniInsert {
         sess.persist(e);
         return e;
     }
+    
+     private SanitarnaIskaznica kreirajSestuSanitarnuIskaznicu(List<Djelatnik>djelatnici) {
+        SanitarnaIskaznica e = new SanitarnaIskaznica();
+        e.setBrojIskaznice("8454");
+        e.setDatumObavljenogPregleda(new Date());
+        e.setVrijediDo(new Date());
+        e.setCijenaKn(BigDecimal.valueOf(200.00));
+        e.setDjelatnik(djelatnici.get(6));
+        sess.persist(e);
+        return e;
+    }
+    
+    
+    
+    
+    
+    
 
 }
