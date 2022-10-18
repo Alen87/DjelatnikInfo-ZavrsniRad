@@ -2,6 +2,7 @@ package djelatnikinfo.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
+
 import java.util.Date;
 import java.util.List;
 
@@ -23,10 +24,11 @@ public class Djelatnik extends Entitet {
     private List<Mobitel> mobiteli;
     @OneToMany(mappedBy = "djelatnik")
     private List<SanitarnaIskaznica> sanitarneiskaznice;
+    @OneToMany(mappedBy = "djelatnik")
+    private List<DjelatnikEdukacija> djelatniciNaEdukacijama;
 
-    public Djelatnik(String ime, String prezime, String oib, String kontakt, String email, Date pocetakRada,
-            String loyalityKartica, String radnaOdjecaObuca, String ugovor, String zavrsenoZanimanje) {
-        super();
+    public Djelatnik(String ime, String prezime, String oib, String kontakt, String email, Date pocetakRada, String loyalityKartica, String radnaOdjecaObuca, String ugovor, String zavrsenoZanimanje, List<Mobitel> mobiteli, List<SanitarnaIskaznica> sanitarneiskaznice, List<DjelatnikEdukacija> djelatniciNaEdukacijama, Integer sifra) {
+        super(sifra);
         this.ime = ime;
         this.prezime = prezime;
         this.oib = oib;
@@ -37,7 +39,12 @@ public class Djelatnik extends Entitet {
         this.radnaOdjecaObuca = radnaOdjecaObuca;
         this.ugovor = ugovor;
         this.zavrsenoZanimanje = zavrsenoZanimanje;
+        this.mobiteli = mobiteli;
+        this.sanitarneiskaznice = sanitarneiskaznice;
+        this.djelatniciNaEdukacijama = djelatniciNaEdukacijama;
     }
+
+   
 
     public Djelatnik() {
         super();
@@ -137,6 +144,14 @@ public class Djelatnik extends Entitet {
 
     public void setSanitarneiskaznice(List<SanitarnaIskaznica> sanitarneiskaznice) {
         this.sanitarneiskaznice = sanitarneiskaznice;
+    }
+
+    public List<DjelatnikEdukacija> getDjelatniciNaEdukacijama() {
+        return djelatniciNaEdukacijama;
+    }
+
+    public void setDjelatniciNaEdukacijama(List<DjelatnikEdukacija> djelatniciNaEdukacijama) {
+        this.djelatniciNaEdukacijama = djelatniciNaEdukacijama;
     }
 
     @Override

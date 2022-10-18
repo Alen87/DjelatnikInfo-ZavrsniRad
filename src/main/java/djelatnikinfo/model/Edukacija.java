@@ -32,7 +32,7 @@ public class Edukacija extends Entitet {
 		this.datum = datum;
 		this.voditeljEdukacije = voditeljEdukacije;
 		this.trajanjeEdukacijeMin = trajanjeEdukacijeMin;
-		//this.djelatniciNaEdukacijama = djelatniciNaEdukacijama;
+		this.djelatniciNaEdukacijama = djelatniciNaEdukacijama;
 	}
 
 	public String getNaziv() {

@@ -49,8 +49,9 @@ public class ObradaDjelatnik extends Obrada<Djelatnik> {
 
     @Override
     protected void kontrolaDelete() throws AppException {
-       kontrolaDeleteMobitelMoraBitiObrisan();
-       kontrolaDeleteSanitarnaIskaznicaMoraBitiObrisana();
+      kontrolaDeleteMobitelMoraBitiObrisan();
+      kontrolaDeleteSanitarnaIskaznicaMoraBitiObrisana();
+      kontrolaDeleteDjelatnikEdukacijaMoraBitiObrisan();
         
        
     }
@@ -122,9 +123,16 @@ public class ObradaDjelatnik extends Obrada<Djelatnik> {
     
      private void kontrolaDeleteSanitarnaIskaznicaMoraBitiObrisana() throws AppException{
        if(entitet.getSanitarneiskaznice()!= null && !entitet.getSanitarneiskaznice().isEmpty()){
-            throw new AppException("Djelatnik ima  sanitarnu  iskaznicu i ne  mooze se obrisati  dok se ne  obrisu saniitarne iskaznice  na  ovom  djelatniku");
+            throw new AppException("Djelatnik ima  sanitarnu  iskaznicu i ne  mooze se obrisati  dok se ne  obrisu sanitarne iskaznice  na  ovom  djelatniku");
         }
       }
+
+    private void kontrolaDeleteDjelatnikEdukacijaMoraBitiObrisan() throws AppException {
+        if(entitet.getDjelatniciNaEdukacijama() != null && !entitet.getDjelatniciNaEdukacijama().isEmpty()){
+            throw new AppException("Djelatnik se nalazi na  grupi djelatnici na edukacijama,i ne  može se obrisati  dok se ne  obriše  sa zadane  grupe  ");
+        }
+        
+    }
     
     
 }
