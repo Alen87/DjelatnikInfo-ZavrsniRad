@@ -407,12 +407,23 @@ public class ProzorEdukacija extends javax.swing.JFrame {
 
     private void btnTraziDjelatnikaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTraziDjelatnikaActionPerformed
 
-        lstDjelatniciUBazi.setModel(new DjelatnikListModel<>(obradaDjelatnik.read(txtUvjet.getText().trim())));
+        List<Djelatnik>djelatnici = obradaDjelatnik.read(txtUvjet.getText().trim());
+        
+        lstDjelatniciUBazi.setModel(new DjelatnikListModel<>(djelatnici));
+        
+        if(djelatnici.isEmpty()){
+           txtUvjet.requestFocus();
+           return;
+        }
+        
+        
 
         try {
             lstDjelatniciUBazi.setSelectedIndex(0);
         } catch (Exception e) {
+            
         }
+         lstDjelatniciNaEdukaciji.requestFocus();
     }//GEN-LAST:event_btnTraziDjelatnikaActionPerformed
 
     private void btnDodajDjelatnikeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDodajDjelatnikeActionPerformed
@@ -465,8 +476,15 @@ public class ProzorEdukacija extends javax.swing.JFrame {
     }//GEN-LAST:event_lstDjelatniciUBaziMouseClicked
 
     private void dodajDjelatnikeNaEdukaciju() {
+        
+        if(lstDjelatniciUBazi.getSelectedValue()== null){
+            return;
+        }
+        
+        
         DefaultListModel<DjelatnikEdukacija> djelatniciNaEdukacijama = (DefaultListModel<DjelatnikEdukacija>) lstDjelatniciNaEdukaciji.getModel();
 
+       
         for (int i = 0; i < djelatniciNaEdukacijama.getSize(); i++) {
 
             if (djelatniciNaEdukacijama.get(i).getDjelatnik().getSifra().equals(lstDjelatniciUBazi.getSelectedValue().getSifra())) {
@@ -492,7 +510,7 @@ public class ProzorEdukacija extends javax.swing.JFrame {
         }
 
         btnTraziDjelatnikaActionPerformed(null);
-        lstDjelatniciNaEdukaciji.requestFocus();
+       
 
     }//GEN-LAST:event_txtUvjetKeyPressed
 
