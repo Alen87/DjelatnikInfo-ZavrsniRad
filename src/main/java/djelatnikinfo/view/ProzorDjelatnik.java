@@ -37,7 +37,7 @@ public class ProzorDjelatnik extends javax.swing.JFrame {
 
     private void postavke() {
         setTitle(Pomocno.NAZIV_APLIKACIJE + " Djelatnici");
-        btnObrisi.setVisible(true);
+        btnObrisi.setVisible(false);
         prilagodiDatePicker();
 
     }
@@ -365,12 +365,12 @@ public class ProzorDjelatnik extends javax.swing.JFrame {
         txtZavrsenoZanimanje.setText(s.getZavrsenoZanimanje());
 
         
-        btnObrisi.setVisible(s.getMobiteli() == null || s.getMobiteli().isEmpty());  
-        btnObrisi.setVisible(s.getSanitarneiskaznice() == null || s.getSanitarneiskaznice().isEmpty());
-        btnObrisi.setVisible(s.getDjelatniciNaEdukacijama() == null || s.getDjelatniciNaEdukacijama().isEmpty());
-        btnObrisi.setVisible((s.getMobiteli() == null || s.getMobiteli().isEmpty()) && 
-                (s.getSanitarneiskaznice() == null || s.getSanitarneiskaznice().isEmpty())&& 
-                (s.getDjelatniciNaEdukacijama() == null || s.getDjelatniciNaEdukacijama().isEmpty()));
+       // btnObrisi.setVisible(s.getMobiteli() == null || s.getMobiteli().isEmpty());  
+       // btnObrisi.setVisible(s.getSanitarneiskaznice() == null || s.getSanitarneiskaznice().isEmpty());
+       // btnObrisi.setVisible(s.getDjelatniciNaEdukacijama() == null || s.getDjelatniciNaEdukacijama().isEmpty());
+       btnObrisi.setVisible((s.getMobiteli() == null || s.getMobiteli().isEmpty()) && 
+                           (s.getSanitarneiskaznice() == null || s.getSanitarneiskaznice().isEmpty())&& 
+                           (s.getDjelatniciNaEdukacijama() == null || s.getDjelatniciNaEdukacijama().isEmpty()));
     }
 
 
