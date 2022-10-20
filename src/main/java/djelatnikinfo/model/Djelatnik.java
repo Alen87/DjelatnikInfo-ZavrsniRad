@@ -159,4 +159,17 @@ public class Djelatnik extends Entitet {
         return this.ime + " " + this.prezime;
     }
 
+//    public boolean isDeletable(){
+//        return 
+//               (this.djelatniciNaEdukacijama==null ||
+//                this.djelatniciNaEdukacijama.isEmpty())
+//                && (this.mobiteli==null
+//                || this.mobiteli.isEmpty())
+//               && (this.sanitarneiskaznice==null
+//                || this.sanitarneiskaznice.isEmpty());
+//    }
+    
+    
+    
+    
 }

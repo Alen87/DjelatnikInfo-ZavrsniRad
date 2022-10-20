@@ -37,7 +37,7 @@ public class ProzorDjelatnik extends javax.swing.JFrame {
 
     private void postavke() {
         setTitle(Pomocno.NAZIV_APLIKACIJE + " Djelatnici");
-        btnObrisi.setVisible(false);
+      //  btnObrisi.setVisible(false);
         prilagodiDatePicker();
 
     }
@@ -369,9 +369,11 @@ public class ProzorDjelatnik extends javax.swing.JFrame {
         txtUgovor.setText(s.getUgovor());
         txtZavrsenoZanimanje.setText(s.getZavrsenoZanimanje());
 
+      //  btnObrisi.setVisible(s.isDeletable()); 
         
-        btnObrisi.setVisible(s.getMobiteli() == null || s.getMobiteli().isEmpty());  
-        btnObrisi.setVisible(s.getSanitarneiskaznice() == null || s.getSanitarneiskaznice().isEmpty());
+        
+       // btnObrisi.setVisible(s.getMobiteli() == null || s.getMobiteli().isEmpty());  
+        //btnObrisi.setVisible(s.getSanitarneiskaznice() == null || s.getSanitarneiskaznice().isEmpty());
        // btnObrisi.setVisible(s.getDjelatniciNaEdukacijama() == null || s.getDjelatniciNaEdukacijama().isEmpty());
        //btnObrisi.setVisible((s.getMobiteli() == null || s.getMobiteli().isEmpty()) && 
                           // (s.getSanitarneiskaznice() == null || s.getSanitarneiskaznice().isEmpty())&& 

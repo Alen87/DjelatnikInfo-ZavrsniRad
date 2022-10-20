@@ -52,7 +52,7 @@ public class ObradaDjelatnik extends Obrada<Djelatnik> {
       kontrolaDeleteMobitelMoraBitiObrisan();
       kontrolaDeleteSanitarnaIskaznicaMoraBitiObrisana();
       kontrolaDeleteDjelatnikEdukacijaMoraBitiObrisan();
-        
+      //kontrolaDeleteMobitelSanitarnaIskaynicaDJelatnikEdukacijaMoraBitiObrisano();  
        
     }
 
@@ -105,34 +105,40 @@ public class ObradaDjelatnik extends Obrada<Djelatnik> {
 
     private void kontrolaImeMoraSadrzavatiSamoSlova() throws AppException {
         if (!entitet.getIme().matches("\\p{L}+")) {
-            throw new AppException("Ime mora sadrzavati samo slova!");
+            throw new AppException("Ime mora sadržavati samo slova!");
         }
     }
 
     private void kontrolaPrezimeMoraSadrzavatiSamoSlova() throws AppException {
         if (!entitet.getPrezime().matches("\\p{L}+")) {
-            throw new AppException("Prezime mora  sadrzavati samo  slova!");
+            throw new AppException("Prezime mora  sadržavati samo  slova!");
         }
     }
 
     private void kontrolaDeleteMobitelMoraBitiObrisan() throws AppException{
        if(entitet.getMobiteli()!=null && !entitet.getMobiteli().isEmpty()){
-            throw new AppException("Djelatnik ima mobitel i ne  moze se obrisati dok se  ne  obrisu  mobiteli na ovom djelatniku ");
+            throw new AppException("Djelatnik ima mobitel, i ne  može se obrisati dok se djelatnik ne obriše zadani mobitela ");
         }    
       }
     
      private void kontrolaDeleteSanitarnaIskaznicaMoraBitiObrisana() throws AppException{
        if(entitet.getSanitarneiskaznice()!= null && !entitet.getSanitarneiskaznice().isEmpty()){
-            throw new AppException("Djelatnik ima  sanitarnu  iskaznicu i ne  mooze se obrisati  dok se ne  obrisu sanitarne iskaznice  na  ovom  djelatniku");
+            throw new AppException("Djelatnik ima  sanitarnu  iskaznicu, i ne može se obrisati dok se ne obriše sanitarna iskaznica zadanog djelatnika");
         }
       }
 
     private void kontrolaDeleteDjelatnikEdukacijaMoraBitiObrisan() throws AppException {
-        if(entitet.getDjelatniciNaEdukacijama() != null && !entitet.getDjelatniciNaEdukacijama().isEmpty()){
-            throw new AppException("Djelatnik se nalazi na  grupi djelatnici na edukacijama,i ne  može se obrisati  dok se ne  obriše  sa zadane  grupe  ");
+        if(entitet.getDjelatniciNaEdukacijama()!= null && !entitet.getDjelatniciNaEdukacijama().isEmpty()){
+            throw new AppException("Djelatnik se nalazi na  edukacijama,i ne  može se obrisati dok se ne obriše sa zadane edukacije ");
         }
         
     }
+
+//    private void kontrolaDeleteMobitelSanitarnaIskaynicaDJelatnikEdukacijaMoraBitiObrisano() throws AppException {
+//       if(!entitet.isDeletable()){
+//          throw new AppException("Djelatnik se nalazi na grupi Mobitel,Sanitarna iskaznica,Djelatnici na  edukacijama,i ne može se obrisati sve dok se nalazi na jednoj od grupa");
+//       }
+//    }
     
     
 }
