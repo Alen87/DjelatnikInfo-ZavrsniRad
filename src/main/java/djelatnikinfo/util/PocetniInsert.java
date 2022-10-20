@@ -50,6 +50,7 @@ public class PocetniInsert {
         kreirajSanitarneIskaznice();
         kreirajOperatera();
         sess.getTransaction().commit();
+        HibernateUtil.reset();
     }
 
     private void kreirajDjelatnike() {

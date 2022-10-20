@@ -55,6 +55,9 @@ public class ObradaEdukacija extends Obrada<Edukacija> {
         entitet.setDjelatniciNaEdukacijama(noviDjelatniciNaEdukacijama);
         session.persist(entitet);
         session.getTransaction().commit();
+        for(DjelatnikEdukacija de : noviDjelatniciNaEdukacijama){
+            session.refresh(de);
+        }
 
     }
 
