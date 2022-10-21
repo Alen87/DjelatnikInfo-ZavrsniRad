@@ -4,8 +4,15 @@
  */
 package djelatnikinfo.view;
 
+import djelatnikinfo.controller.ObradaEdukacija;
+import djelatnikinfo.model.Edukacija;
 import djelatnikinfo.util.Pomocno;
+import java.awt.BorderLayout;
 import javax.swing.JOptionPane;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.data.general.DefaultPieDataset;
 
 /**
  *
@@ -19,6 +26,7 @@ public class Izbornik extends javax.swing.JFrame {
     public Izbornik() {
         initComponents();
         postavke();
+        definirajGraf();
     }
     
     private void postavke(){
@@ -27,6 +35,31 @@ public class Izbornik extends javax.swing.JFrame {
                  Pomocno.operater.getPrezime());
     }
 
+    private void definirajGraf(){
+        DefaultPieDataset ds = new DefaultPieDataset();
+        for(Edukacija e : new ObradaEdukacija().read()){
+            
+              var broj = e.getDjelatniciNaEdukacijama() == null ? 0 : e.getDjelatniciNaEdukacijama().size();
+              ds.setValue(e.getNaziv() + "(" + broj + ")", broj);
+            }
+            
+            JFreeChart jfc = ChartFactory.createPieChart("Broj djelatnika na edukacijama", ds);
+            
+            ChartPanel cp = new ChartPanel(jfc);
+            
+            pnlGraf.setLayout(new BorderLayout());
+            pnlGraf.add(cp,BorderLayout.CENTER);
+            pnlGraf.validate();
+            
+        
+        
+        
+    }
+    
+    
+    
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -36,6 +69,7 @@ public class Izbornik extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        pnlGraf = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
@@ -47,6 +81,17 @@ public class Izbornik extends javax.swing.JFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        javax.swing.GroupLayout pnlGrafLayout = new javax.swing.GroupLayout(pnlGraf);
+        pnlGraf.setLayout(pnlGrafLayout);
+        pnlGrafLayout.setHorizontalGroup(
+            pnlGrafLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        pnlGrafLayout.setVerticalGroup(
+            pnlGrafLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 277, Short.MAX_VALUE)
+        );
 
         jMenu1.setText("Programi");
 
@@ -110,11 +155,11 @@ public class Izbornik extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(pnlGraf, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 277, Short.MAX_VALUE)
+            .addComponent(pnlGraf, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -160,5 +205,6 @@ public class Izbornik extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
+    private javax.swing.JPanel pnlGraf;
     // End of variables declaration//GEN-END:variables
 }
