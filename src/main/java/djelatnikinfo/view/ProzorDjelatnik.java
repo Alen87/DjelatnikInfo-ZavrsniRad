@@ -94,7 +94,7 @@ public class ProzorDjelatnik extends javax.swing.JFrame {
         txtZavrsenoZanimanje = new javax.swing.JTextField();
         btnDodaj = new javax.swing.JButton();
         btnPromjeni = new javax.swing.JButton();
-        btnObrisi = new javax.swing.JButton();
+        btnObriši = new javax.swing.JButton();
         txtDovuciOib = new javax.swing.JButton();
         dpPocetakRada = new com.github.lgooddatepicker.components.DatePicker();
 
@@ -118,15 +118,15 @@ public class ProzorDjelatnik extends javax.swing.JFrame {
 
         jLabel5.setText("Email");
 
-        jLabel6.setText("Pocetak rada");
+        jLabel6.setText("Početak rada");
 
         jLabel7.setText("Loyality kartica");
 
-        jLabel8.setText("Radna  odjeca i  obuca");
+        jLabel8.setText("Radna  odjeća i  obuća");
 
         jLabel9.setText("Ugovor");
 
-        jLabel10.setText("Zavrseno zanimanje");
+        jLabel10.setText("Završeno zanimanje");
 
         btnDodaj.setText("Dodaj");
         btnDodaj.addActionListener(new java.awt.event.ActionListener() {
@@ -142,10 +142,10 @@ public class ProzorDjelatnik extends javax.swing.JFrame {
             }
         });
 
-        btnObrisi.setText("Obisi");
-        btnObrisi.addActionListener(new java.awt.event.ActionListener() {
+        btnObriši.setText("Obriši");
+        btnObriši.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnObrisiActionPerformed(evt);
+                btnObrišiActionPerformed(evt);
             }
         });
 
@@ -176,7 +176,7 @@ public class ProzorDjelatnik extends javax.swing.JFrame {
                                 .addGap(60, 60, 60)
                                 .addComponent(btnPromjeni, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(63, 63, 63)
-                                .addComponent(btnObrisi))
+                                .addComponent(btnObriši))
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                     .addComponent(txtIme, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -257,7 +257,7 @@ public class ProzorDjelatnik extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnDodaj)
                     .addComponent(btnPromjeni)
-                    .addComponent(btnObrisi))
+                    .addComponent(btnObriši))
                 .addContainerGap(22, Short.MAX_VALUE))
         );
 
@@ -307,7 +307,7 @@ public class ProzorDjelatnik extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnPromjeniActionPerformed
 
-    private void btnObrisiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnObrisiActionPerformed
+    private void btnObrišiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnObrišiActionPerformed
         if (lstEntiteti.getSelectedValue()==null || obrada.getEntitet() == null) {
             JOptionPane.showMessageDialog(rootPane, "Prvo  odaberite  stavku");
             return;
@@ -325,7 +325,7 @@ public class ProzorDjelatnik extends javax.swing.JFrame {
 
         }
 
-    }//GEN-LAST:event_btnObrisiActionPerformed
+    }//GEN-LAST:event_btnObrišiActionPerformed
 
     private void txtDovuciOibActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDovuciOibActionPerformed
         txtOib.setText(Pomocno.dovuciOib());
@@ -383,7 +383,7 @@ public class ProzorDjelatnik extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDodaj;
-    private javax.swing.JButton btnObrisi;
+    private javax.swing.JButton btnObriši;
     private javax.swing.JButton btnPromjeni;
     private com.github.lgooddatepicker.components.DatePicker dpPocetakRada;
     private javax.swing.JLabel jLabel1;

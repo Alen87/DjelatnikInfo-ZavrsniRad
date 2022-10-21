@@ -35,7 +35,7 @@ public class Izbornik extends javax.swing.JFrame {
                  Pomocno.operater.getPrezime());
     }
 
-    private void definirajGraf(){
+    public void definirajGraf(){
         DefaultPieDataset ds = new DefaultPieDataset();
         for(Edukacija e : new ObradaEdukacija().read()){
             
@@ -190,7 +190,7 @@ public class Izbornik extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-       new ProzorEdukacija().setVisible(true);
+       new ProzorEdukacija(this).setVisible(true);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
    

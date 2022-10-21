@@ -40,7 +40,7 @@
                               <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
                               <Component id="btnPromjeni" min="-2" pref="93" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="63" max="-2" attributes="0"/>
-                              <Component id="btnObrisi" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnObriši" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
@@ -141,7 +141,7 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btnDodaj" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnPromjeni" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnObrisi" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnObriši" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="22" max="32767" attributes="0"/>
           </Group>
@@ -209,7 +209,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel6">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Pocetak rada"/>
+        <Property name="text" type="java.lang.String" value="Po&#x10d;etak rada"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel7">
@@ -221,7 +221,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel8">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Radna  odjeca i  obuca"/>
+        <Property name="text" type="java.lang.String" value="Radna  odje&#x107;a i  obu&#x107;a"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtRadnaOdjecaObuca">
@@ -235,7 +235,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel10">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Zavrseno zanimanje"/>
+        <Property name="text" type="java.lang.String" value="Zavr&#x161;eno zanimanje"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtZavrsenoZanimanje">
@@ -256,12 +256,12 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPromjeniActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="btnObrisi">
+    <Component class="javax.swing.JButton" name="btnObri&#x161;i">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Obisi"/>
+        <Property name="text" type="java.lang.String" value="Obri&#x161;i"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnObrisiActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnObri&#x161;iActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="txtDovuciOib">
