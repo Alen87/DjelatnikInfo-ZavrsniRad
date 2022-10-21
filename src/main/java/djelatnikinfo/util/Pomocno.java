@@ -12,7 +12,9 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.time.ZoneId;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Locale;
 
 import org.jsoup.Jsoup;
@@ -106,7 +108,18 @@ public class Pomocno {
     }
      
   
-     
+    public static Date createDate(int godina,int mjesec,int dan){
+         
+        GregorianCalendar gc = (GregorianCalendar) Calendar.getInstance();
+        gc.set(Calendar.YEAR,godina);
+        gc.set(Calendar.MONTH,mjesec -1);
+        gc.set(Calendar.DAY_OF_MONTH,dan);
+        
+        
+        return gc.getTime();
+         
+         
+     }
      
      
      

@@ -16,7 +16,9 @@ import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -70,7 +72,7 @@ public class PocetniInsert {
         d.setOib("28247397961");
         d.setKontakt("091/3423456");
         d.setEmail("danko.stefancic@gmail.com");
-        d.setPocetakRada(new Date());
+        d.setPocetakRada(Pomocno.createDate(2015, 8, 17));
         d.setLoyalityKartica("5647893054728");
         d.setRadnaOdjecaObuca("hlače 2kom 52,majica 3kom L,papuče 42");
         d.setUgovor("Neodređeno");
@@ -88,7 +90,7 @@ public class PocetniInsert {
         a.setOib("33313572379");
         a.setKontakt("091/2233456");
         a.setEmail("josip.nad@gmail.com");
-        a.setPocetakRada(new Date());
+        a.setPocetakRada(Pomocno.createDate(2018, 9, 25));
         a.setLoyalityKartica("8455674893485");
         a.setRadnaOdjecaObuca("hlače 2kom 52,majica 3kom M,papuče 41");
         a.setUgovor("Neodređeno");
@@ -106,7 +108,7 @@ public class PocetniInsert {
         b.setOib("75894763546");
         b.setKontakt("098/2233456");
         b.setEmail("matej.cindric@gmail.com");
-        b.setPocetakRada(new Date());
+        b.setPocetakRada(Pomocno.createDate(2010, 3, 25));
         b.setLoyalityKartica("48933506200");
         b.setRadnaOdjecaObuca("hlače 2kom 46,majica 3kom M,papuče 43");
         b.setUgovor("Neodređeno");
@@ -123,7 +125,7 @@ public class PocetniInsert {
         c.setOib("46738926735");
         c.setKontakt("091/4353456");
         c.setEmail("stjepan.biljus@live.com");
-        c.setPocetakRada(new Date());
+        c.setPocetakRada(Pomocno.createDate(2016, 3, 22));
         c.setLoyalityKartica("47835674856");
         c.setRadnaOdjecaObuca("hlače 2kom 46,majica 3kom L,papuče 44");
         c.setUgovor("Neodređeno");
@@ -140,7 +142,7 @@ public class PocetniInsert {
         e.setOib("21007996506");
         e.setKontakt("091/7689456");
         e.setEmail("dino.pavic@gmail.com");
-        e.setPocetakRada(new Date());
+        e.setPocetakRada(Pomocno.createDate(2015, 5, 10));
         e.setLoyalityKartica("76895048905");
         e.setRadnaOdjecaObuca("Zimsko odjelo br.56,čizme br.44,majica kratki rukav XL");
         e.setUgovor("Na određeno do 15.12.2022");
@@ -158,7 +160,7 @@ public class PocetniInsert {
         e.setOib("16150747941");
         e.setKontakt("091/7684956");
         e.setEmail("andrej.hmura@gmail.com");
-        e.setPocetakRada(new Date());
+        e.setPocetakRada(Pomocno.createDate(2020, 11, 2));
         e.setLoyalityKartica("76895587405");
         e.setRadnaOdjecaObuca("hlače 2kom 46,majica 3kom L,papuče 44");
         e.setUgovor("Neodređeno");
@@ -175,7 +177,7 @@ public class PocetniInsert {
         e.setOib("46134905702");
         e.setKontakt("091/2224956");
         e.setEmail("antonio.marinovic@gmail.com");
-        e.setPocetakRada(new Date());
+        e.setPocetakRada(Pomocno.createDate(2020, 3, 3));
         e.setLoyalityKartica("76899857640");
         e.setRadnaOdjecaObuca("hlače 2kom 54,majica 3kom XL,papuče 44");
         e.setUgovor("Neodređeno");
@@ -203,7 +205,7 @@ public class PocetniInsert {
     private Edukacija kreirajPrvuEdukaciju(List<Djelatnik>djelatnici) {
         Edukacija a = new Edukacija();
         a.setNaziv("Sigurnost hrane");
-        a.setDatum(new Date());
+        a.setDatum(Pomocno.createDate(2022, 3, 21));
         a.setVoditeljEdukacije("Igor Đuza");
         a.setTrajanjeEdukacijeMin(38);
        
@@ -236,7 +238,7 @@ public class PocetniInsert {
      private Edukacija kreirajDruguEdukaciju(List<Djelatnik>djelatnici) {
         Edukacija a = new Edukacija();
         a.setNaziv("Metal detektor");
-        a.setDatum(new Date());
+        a.setDatum(Pomocno.createDate(2022, 5, 20));
         a.setVoditeljEdukacije("Mario Šteko");
         a.setTrajanjeEdukacijeMin(60);
        
@@ -265,7 +267,7 @@ public class PocetniInsert {
       private Edukacija kreirajTrecuEdukaciju(List<Djelatnik>djelatnici) {
         Edukacija a = new Edukacija();
         a.setNaziv("Alergeni");
-        a.setDatum(new Date());
+        a.setDatum(Pomocno.createDate(2022, 7, 15));
         a.setVoditeljEdukacije("Igor Đuza");
         a.setTrajanjeEdukacijeMin(45);
        
@@ -294,7 +296,7 @@ public class PocetniInsert {
       private Edukacija kreirajCetvrtuEdukaciju(List<Djelatnik>djelatnici) {
         Edukacija a = new Edukacija();
         a.setNaziv("Sigurnost upravljanja strojeva");
-        a.setDatum(new Date());
+        a.setDatum(Pomocno.createDate(2022, 8, 10));
         a.setVoditeljEdukacije("Igor Đuza");
         a.setTrajanjeEdukacijeMin(60);
        
@@ -348,8 +350,8 @@ public class PocetniInsert {
         Mobitel m = new Mobitel();
         m.setNaziv("SAMSUNG Galaxy A52S 5G White");
         m.setBroj("091/267 5332");
-        m.setDatumZaprimanja(new Date());
-        m.setPravoNaSlijedeci(new Date());
+        m.setDatumZaprimanja(Pomocno.createDate(2021, 4, 21));
+        m.setPravoNaSlijedeci(Pomocno.createDate(2023, 4, 21));
         m.setSerijskiBroj("B19V3CELCO2011Y");
         m.setDjelatnik(djelatnici.get(1));
         sess.persist(m);
@@ -360,8 +362,8 @@ public class PocetniInsert {
         Mobitel m = new Mobitel();
         m.setNaziv("HUAWEI Nova Y90 Black");
         m.setBroj("091/267 5331");
-        m.setDatumZaprimanja(new Date());
-        m.setPravoNaSlijedeci(new Date());
+        m.setDatumZaprimanja(Pomocno.createDate(2022, 8, 17));
+        m.setPravoNaSlijedeci(Pomocno.createDate(2024, 8, 17));
         m.setSerijskiBroj("B23V4CELCO8311Y");
         m.setDjelatnik(djelatnici.get(0));
         sess.persist(m);
@@ -372,8 +374,8 @@ public class PocetniInsert {
         Mobitel m = new Mobitel();
         m.setNaziv("SAMSUNG Galaxy A13 White");
         m.setBroj("091/267 5330");
-        m.setDatumZaprimanja(new Date());
-        m.setPravoNaSlijedeci(new Date());
+        m.setDatumZaprimanja(Pomocno.createDate(2022, 3, 17));
+        m.setPravoNaSlijedeci(Pomocno.createDate(2024, 3, 17));
         m.setSerijskiBroj("B23V4CELCO7856Y");
         m.setDjelatnik(djelatnici.get(4));
         sess.persist(m);
@@ -405,8 +407,8 @@ public class PocetniInsert {
     private SanitarnaIskaznica kreirajPrvuSanitarnuIskaznicu(List<Djelatnik>djelatnici) {
         SanitarnaIskaznica a = new SanitarnaIskaznica();
         a.setBrojIskaznice("6574");
-        a.setDatumObavljenogPregleda(new Date());
-        a.setVrijediDo(new Date());
+        a.setDatumObavljenogPregleda(Pomocno.createDate(2022, 8, 17));
+        a.setVrijediDo(Pomocno.createDate(2023, 8, 17));
         a.setCijenaKn(BigDecimal.valueOf(200.00));
         a.setDjelatnik(djelatnici.get(2));
         sess.persist(a);
@@ -416,8 +418,8 @@ public class PocetniInsert {
     private SanitarnaIskaznica kreirajDruguSanitarnuIskaznicu(List<Djelatnik>djelatnici) {
         SanitarnaIskaznica b = new SanitarnaIskaznica();
         b.setBrojIskaznice("7563");
-        b.setDatumObavljenogPregleda(new Date());
-        b.setVrijediDo(new Date());
+        b.setDatumObavljenogPregleda(Pomocno.createDate(2022, 5, 20));
+        b.setVrijediDo(Pomocno.createDate(2023, 5, 20));
         b.setCijenaKn(BigDecimal.valueOf(200.00));
         b.setDjelatnik(djelatnici.get(4));
         sess.persist(b);
@@ -427,8 +429,8 @@ public class PocetniInsert {
     private SanitarnaIskaznica kreirajTrecuSanitarnuIskaznicu( List<Djelatnik>djelatnici ) {
         SanitarnaIskaznica c = new SanitarnaIskaznica();
         c.setBrojIskaznice("2365");
-        c.setDatumObavljenogPregleda(new Date());
-        c.setVrijediDo(new Date());
+        c.setDatumObavljenogPregleda(Pomocno.createDate(2021, 12, 12));
+        c.setVrijediDo(Pomocno.createDate(2022, 12, 12));
         c.setCijenaKn(BigDecimal.valueOf(200.00));
         c.setDjelatnik(djelatnici.get(0));
         sess.persist(c);
@@ -438,8 +440,8 @@ public class PocetniInsert {
     private SanitarnaIskaznica kreirajCetvrtuSanitarnuIskaznicu(List<Djelatnik>djelatnici) {
         SanitarnaIskaznica d = new SanitarnaIskaznica();
         d.setBrojIskaznice("8965");
-        d.setDatumObavljenogPregleda(new Date());
-        d.setVrijediDo(new Date());
+        d.setDatumObavljenogPregleda(Pomocno.createDate(2021, 12, 20));
+        d.setVrijediDo(Pomocno.createDate(2022, 12, 20));
         d.setCijenaKn(BigDecimal.valueOf(200.00));
         d.setDjelatnik(djelatnici.get(1));
         sess.persist(d);
@@ -449,8 +451,8 @@ public class PocetniInsert {
     private SanitarnaIskaznica kreirajPetuSanitarnuIskaznicu(List<Djelatnik>djelatnici) {
         SanitarnaIskaznica e = new SanitarnaIskaznica();
         e.setBrojIskaznice("8453");
-        e.setDatumObavljenogPregleda(new Date());
-        e.setVrijediDo(new Date());
+        e.setDatumObavljenogPregleda(Pomocno.createDate(2022, 9, 12));
+        e.setVrijediDo(Pomocno.createDate(2023, 9, 12));
         e.setCijenaKn(BigDecimal.valueOf(200.00));
         e.setDjelatnik(djelatnici.get(3));
         sess.persist(e);
@@ -460,8 +462,8 @@ public class PocetniInsert {
      private SanitarnaIskaznica kreirajSestuSanitarnuIskaznicu(List<Djelatnik>djelatnici) {
         SanitarnaIskaznica e = new SanitarnaIskaznica();
         e.setBrojIskaznice("8454");
-        e.setDatumObavljenogPregleda(new Date());
-        e.setVrijediDo(new Date());
+        e.setDatumObavljenogPregleda(Pomocno.createDate(2022, 12, 12));
+        e.setVrijediDo(Pomocno.createDate(2023, 12, 12));
         e.setCijenaKn(BigDecimal.valueOf(200.00));
         e.setDjelatnik(djelatnici.get(6));
         sess.persist(e);
