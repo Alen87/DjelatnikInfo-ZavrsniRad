@@ -27,14 +27,21 @@ public class ObradaEdukacija extends Obrada<Edukacija> {
         kontrolaCreate();
         session.beginTransaction();
         session.persist(entitet);
-
+        
+        List<DjelatnikEdukacija> djelatniciNaEdukacijama = new ArrayList<>();
+        DjelatnikEdukacija novi;
         for (DjelatnikEdukacija de : noviDjelatniciNaEdukacijama) {
-            de.setEdukacija(entitet);
-            session.persist(de);
+          
+            novi = new DjelatnikEdukacija();
+            novi.setEdukacija(entitet);
+            novi.setDjelatnik(de.getDjelatnik());
+            novi.setOcijena(de.getOcijena());
+            session.persist(novi);
+            djelatniciNaEdukacijama.add(novi);
+            
         }
 
-        entitet.setDjelatniciNaEdukacijama(noviDjelatniciNaEdukacijama);
-
+        entitet.setDjelatniciNaEdukacijama(djelatniciNaEdukacijama);
         session.getTransaction().commit();
 
     }
