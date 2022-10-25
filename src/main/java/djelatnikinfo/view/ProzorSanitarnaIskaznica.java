@@ -271,7 +271,17 @@ public class ProzorSanitarnaIskaznica extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "Prvo  odaberite  stavku za brisanje");
             return;
         }
-
+        
+         if(JOptionPane.showConfirmDialog(
+                rootPane, 
+                "Sigurno obrisati sanitarnu iskaznicu " + obrada.getEntitet().getBrojIskaznice(),
+                "Brisanje sanitarne iskaznice",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE)==JOptionPane.NO_OPTION){
+            return;
+        }
+        
+       
         try {
             obrada.delete();
             selectedIndex = lstEntiteti.getSelectedIndex() - 1;
@@ -285,6 +295,15 @@ public class ProzorSanitarnaIskaznica extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_btnObrisiActionPerformed
+   
+    private void pocistiView(){
+        
+        
+        
+    }
+    
+    
+    
     private void popuniModel() {
         var s = obrada.getEntitet();
         s.setBrojIskaznice(txtBrojIskaznice.getText());

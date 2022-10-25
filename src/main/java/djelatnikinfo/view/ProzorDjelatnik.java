@@ -313,6 +313,11 @@ public class ProzorDjelatnik extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "Prvo  odaberite  stavku");
             return;
         }
+        
+        if(JOptionPane.showConfirmDialog(rootPane, "Sigurno obrisati djelatnika " + obrada.getEntitet().getIme()+ " " + obrada.getEntitet().getPrezime(),
+                                                   "Brisanje djelatnika ", JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE)==JOptionPane.NO_OPTION){
+            return;
+        }
 
         try {
             obrada.delete();

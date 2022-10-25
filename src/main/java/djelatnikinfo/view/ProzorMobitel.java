@@ -268,9 +268,19 @@ public class ProzorMobitel extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "Prvo odaberite stavku za brisanje");
             return;
         }
+       
+        if(JOptionPane.showConfirmDialog(
+                rootPane, 
+                "Sigurno obrisati mobitel " + obrada.getEntitet().getNaziv(),
+                "Brisanje mobitela",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE)==JOptionPane.NO_OPTION){
+            return;
+        }
 
-        try {
+         try {
             obrada.delete();
+            pocistiView();
             selectedIndex = lstEntiteti.getSelectedIndex() - 1;
             if (selectedIndex < 0) {
                 selectedIndex = 0;
@@ -282,6 +292,20 @@ public class ProzorMobitel extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnObrisiActionPerformed
 
+    private void pocistiView(){
+        txtNaziv.setText("");
+        txtBroj.setText("");
+        dpDatumZaprimanja.setDate(null);
+        dpPravoNaSlijedeci.setDate(null);
+        txtSerijskiBroj.setText(null);
+        cmbDjelatnici.setSelectedItem(null);
+        
+        
+    }
+    
+    
+    
+    
     private void popuniModel(){
        var e = obrada.getEntitet();
        e.setNaziv(txtNaziv.getText());

@@ -411,7 +411,14 @@ public class ProzorEdukacija extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "Prvo odaberite stavku  za brisanje");
             return;
         }
-
+        
+        
+        
+        if(JOptionPane.showConfirmDialog(rootPane, "Sigurno obrisati edukaciju " + obrada.getEntitet().getNaziv(),
+                                                   "Brisanje edukacije ",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE) == JOptionPane.NO_OPTION){
+            return;
+       }
+        
         popuniModel();
 
         try {
@@ -422,7 +429,7 @@ public class ProzorEdukacija extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, ex.getPoruka());
         }
 
-
+        izbornik.definirajGraf();
     }//GEN-LAST:event_btnObrisiActionPerformed
 
     private void pocistiView() {
