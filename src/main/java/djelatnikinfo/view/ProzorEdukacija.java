@@ -399,6 +399,7 @@ public class ProzorEdukacija extends javax.swing.JFrame {
 
             ucitaj();
         } catch (AppException ex) {
+            obrada.refresh();
             JOptionPane.showMessageDialog(rootPane, ex.getPoruka());
         }
         

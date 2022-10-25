@@ -258,6 +258,7 @@ public class ProzorMobitel extends javax.swing.JFrame {
             ucitaj();
             
         } catch (AppException ex) {
+            obrada.refresh();
             JOptionPane.showMessageDialog(rootPane, ex.getPoruka());
         }
     }//GEN-LAST:event_btnPromjeniActionPerformed

@@ -302,6 +302,7 @@ public class ProzorDjelatnik extends javax.swing.JFrame {
             selectedIndex = lstEntiteti.getSelectedIndex();
             ucitaj();
         } catch (AppException ex) {
+            obrada.refresh();
             JOptionPane.showMessageDialog(rootPane, ex.getPoruka());
         }
 
