@@ -15,7 +15,6 @@ import djelatnikinfo.util.Pomocno;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
-import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.Locale;
@@ -284,6 +283,7 @@ public class ProzorSanitarnaIskaznica extends javax.swing.JFrame {
        
         try {
             obrada.delete();
+            pocistiView();
             selectedIndex = lstEntiteti.getSelectedIndex() - 1;
             if (selectedIndex < 0) {
                 selectedIndex = 0;
@@ -297,7 +297,11 @@ public class ProzorSanitarnaIskaznica extends javax.swing.JFrame {
     }//GEN-LAST:event_btnObrisiActionPerformed
    
     private void pocistiView(){
-        
+       txtBrojIskaznice.setText("");
+       dpDatumObavljenogPregleda.setDate(null);
+       dpVrijediDo.setDate(null);
+       txtCijena.setText("");
+       cmbDjelatnici.setSelectedItem(null);
         
         
     }
