@@ -162,11 +162,6 @@ public class ProzorEdukacija extends javax.swing.JFrame {
             }
         });
 
-        lstDjelatniciNaEdukaciji.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                lstDjelatniciNaEdukacijiKeyPressed(evt);
-            }
-        });
         lstDjelatniciNaEdukaciji.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
                 lstDjelatniciNaEdukacijiValueChanged(evt);
@@ -192,6 +187,11 @@ public class ProzorEdukacija extends javax.swing.JFrame {
         lstDjelatniciUBazi.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lstDjelatniciUBaziMouseClicked(evt);
+            }
+        });
+        lstDjelatniciUBazi.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                lstDjelatniciUBaziKeyPressed(evt);
             }
         });
         jScrollPane4.setViewportView(lstDjelatniciUBazi);
@@ -486,15 +486,19 @@ public class ProzorEdukacija extends javax.swing.JFrame {
     }//GEN-LAST:event_btnTraziDjelatnikaActionPerformed
 
     private void btnDodajDjelatnikeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDodajDjelatnikeActionPerformed
+         
+        
+        
+      //  DefaultListModel<DjelatnikEdukacija> m = (DefaultListModel<DjelatnikEdukacija>) lstDjelatniciNaEdukaciji.getModel();
+           
+      //  for (Djelatnik d : lstDjelatniciUBazi.getSelectedValuesList()) {
 
-        DefaultListModel<DjelatnikEdukacija> m = (DefaultListModel<DjelatnikEdukacija>) lstDjelatniciNaEdukaciji.getModel();
+        //    m.addElement(kreirajDjelatnikeNaEdukacijama(obrada.getEntitet(), d, ""));
 
-        for (Djelatnik d : lstDjelatniciUBazi.getSelectedValuesList()) {
+        //}
 
-            m.addElement(kreirajDjelatnikeNaEdukacijama(obrada.getEntitet(), d, ""));
-
-        }
-
+        dodajDjelatnikeNaEdukaciju();
+        
         lstDjelatniciNaEdukaciji.repaint();
         postaviBrojDjelatnika();
 
@@ -551,7 +555,7 @@ public class ProzorEdukacija extends javax.swing.JFrame {
         for (int i = 0; i < djelatniciNaEdukacijama.getSize(); i++) {
 
             if (djelatniciNaEdukacijama.get(i).getDjelatnik().getSifra().equals(lstDjelatniciUBazi.getSelectedValue().getSifra())) {
-                JOptionPane.showMessageDialog(rootPane, "Djelatnik je već  dodan na edukaciju");
+                JOptionPane.showMessageDialog(rootPane, "Djelatnik je već dodan na edukaciju");
                 return;
 
             }
@@ -579,15 +583,14 @@ public class ProzorEdukacija extends javax.swing.JFrame {
 
     }//GEN-LAST:event_txtUvjetKeyPressed
 
-    private void lstDjelatniciNaEdukacijiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_lstDjelatniciNaEdukacijiKeyPressed
-        if (evt.getKeyCode() != KeyEvent.VK_ENTER) {
+    private void lstDjelatniciUBaziKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_lstDjelatniciUBaziKeyPressed
+       if (evt.getKeyCode() != KeyEvent.VK_ENTER) {
             return;
         }
 
         dodajDjelatnikeNaEdukaciju();
         
-
-    }//GEN-LAST:event_lstDjelatniciNaEdukacijiKeyPressed
+    }//GEN-LAST:event_lstDjelatniciUBaziKeyPressed
 
     private void popuniModel() {
         var d = obrada.getEntitet();
