@@ -323,13 +323,13 @@ public class ProzorEdukacija extends javax.swing.JFrame {
                                 .addComponent(jLabel6)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 56, Short.MAX_VALUE))
+                        .addGap(0, 39, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(46, 46, 46)
+                                .addGap(101, 101, 101)
                                 .addComponent(btnDodajDjelatnike)
-                                .addGap(75, 75, 75)
+                                .addGap(44, 44, 44)
                                 .addComponent(btnObrisiDjelatnike))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -351,9 +351,9 @@ public class ProzorEdukacija extends javax.swing.JFrame {
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                             .addComponent(txtUvjet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(btnTraziDjelatnika))
-                                        .addGap(18, 18, 18)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addContainerGap(110, Short.MAX_VALUE))))
         );
 
         pack();
@@ -388,7 +388,7 @@ public class ProzorEdukacija extends javax.swing.JFrame {
 
     private void btnPromjeniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPromjeniActionPerformed
         if (lstEntiteti.getSelectedValue()==null || obrada.getEntitet() == null) {
-            JOptionPane.showMessageDialog(rootPane, "Prvo  odaberite  stavku za  promjenu");
+            JOptionPane.showMessageDialog(rootPane, "Prvo odaberite stavku za promjenu");
             return;
         }
        
@@ -396,11 +396,12 @@ public class ProzorEdukacija extends javax.swing.JFrame {
 
         try {
             obrada.update();
-
             ucitaj();
+            
         } catch (AppException ex) {
             obrada.refresh();
             JOptionPane.showMessageDialog(rootPane, ex.getPoruka());
+             
         }
         
         izbornik.definirajGraf();
@@ -408,7 +409,7 @@ public class ProzorEdukacija extends javax.swing.JFrame {
 
     private void btnObrisiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnObrisiActionPerformed
         if ( lstEntiteti.getSelectedValue()==null || obrada.getEntitet() == null) {
-            JOptionPane.showMessageDialog(rootPane, "Prvo odaberite stavku  za brisanje");
+            JOptionPane.showMessageDialog(rootPane, "Prvo odaberite stavku za brisanje");
             return;
         }
         
